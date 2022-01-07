@@ -1,6 +1,7 @@
 # KochbuchDjango
 Kochbuch app für Python Kurs
-https://miro.com/app/board/o9J_lmER22A=/
+https://miro.com/app/board/o9J_lmER22A=/  
+Code Anleitung https://cloud.hs-augsburg.de/s/FSPxopKBnfXp3FS
 
 ## "Wie kriege ich dieses Repository das erste mal in mein Pycharm?"  
 -> Pycharm Clone Funktion  
