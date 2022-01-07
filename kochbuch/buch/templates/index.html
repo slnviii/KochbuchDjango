@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>One Kitchen</title>
+</head>
+<body>
+    <h1> One Kitchen</h1>
+
+{% for recipe in recipes %}
+    <li>
+        {{ recipe.title }} <br>
+        <br>
+        <img src= "{{ recipe.image.url}}"> <br>
+        <br>
+        {{ recipe.ingr }} <br>
+        <br>
+        {{ recipe.instr }} <br>
+        <br>
+         </li>
+{% endfor %}
+</body>
+</html>
