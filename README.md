@@ -54,7 +54,7 @@ Pycharm holt sich nun den aktuellen Code unseres "dev" Verzeichnis aus github un
 Nach dem Commit sind die änderungen nun lokal auf deinem branch gespeichert, aber noch nicht auf unserem Github oder deinen lokalen übergeordneten branches wie dev und master  
 **#7 MERGE** Nun den "dev" branch auswählen als aktiv(rechtsklick checkout), und dann rechtsklick auf den branch den man gerade bearbeitet hat (test hier) und "merge selected branch into current"  
 Dies fügt die Änderungen des temporären branches "test" auf den lokalen "dev" branch  
-
+![alt text](https://cloud.hs-augsburg.de/s/CFngYP64dtEgcQC/preview)
 Nun sollte eigentlich alles passen und man den lokalen dev branch mit seinen Änderungen auf unser github hochladen und den remote dev branch so aktualisieren  
 Es kann jetzt jedoch vorkommen, dass jemand während ihr an einer Datei lokal gearbeitet habt, diese Datei auch bei sich bearbeitet hat  
 Beispiel: ihr beide habt unseren Dev Branch Version 1.9 von unserem github geladen, und ihr beide habt die datei index.html bearbeitet  
