@@ -24,10 +24,12 @@
 
 <h1 style="text-align: center;font-family: OP; font-size:120px; transform: rotate(10deg); ">One Kitchen</h1>
     {%  if user.is_authenticated %}
-    <p style="font-size:50px"> Hallo, {{ user.username }}.</p>
+    <p style="font-size:50px; text-align: center; margin-top: 30px"> Hallo, {{ user.username }}.</p>
     {% endif %}
-    <p><button type="button"><a href="{% url 'upload' %}">Rezept hochladen</a></button></p>
-    <p><button type="button"><a href="{% url 'rezepte_main' %}">Rezepte</a></button></p>
+    <div style="text-align: center"><a href="{% url 'upload' %}"><img src="/media/dinner-recipes.png"width="300"
+     height="300"></a>
+    <a href="{% url 'rezepte' %}"><img src="/media/rezepte.png"width="300"
+     height="300"></a></div>
 
 </body>
 
