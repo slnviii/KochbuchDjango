@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+    body {
+        color: black;
+        font-size: 20px;
+        background-color: antiquewhite;
+    }
+
+    table {
+        overflow: hidden;
+        border-collapse: collapse;
+        position: relative;
+    }
+    td {
+        border: 1px solid black;
+        font-size: 20px;
+        text-align: center;
+        background-color: azure;
+    }
+     th {
+        border: 1px solid black;
+         background-color: #f2f2f2;
+    }
+    </style>
+    <title>{{ category.name }}</title>
+</head>
+<body>
+<p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
+<h1>Rezepte für {{ category.name }}</h1>
+
+ <table style="border: 1px solid black">
+    <tr style="font-size: 30px;border: 1px solid black">
+        <th></th>
+        <th style="width:400px;">Rezept</th>
+        <th>Author</th>
+    </tr>
+
+    {% for recipe in category.recipe_set.all %}
+<tr style="border: 1px solid black">
+       <td style="width:150px; height:100px;"> <img src= "{{ recipe.image.url}}"style="max-height:100%; max-width:100%" /> </td>
+    <td style="width:400px;"><a href="{%  url 'recipe' %}?name={{ recipe.title }}">{{ recipe.title }}</a></td>
+       <td style="width:150px;">   {{ recipe.author }}</td>
+
+</tr>
+
+
+{% endfor %}
+</table>
+</body>
+</html>

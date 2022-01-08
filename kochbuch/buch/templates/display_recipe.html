@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ recipe.title }}</title>
+    <style>
+
+      @font-face { font-family: "OP"; src: url("../static/OP.ttf")}
+
+        body{
+            background-color: antiquewhite;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
+<p style="font-size: 35px;font-family:Verdana">{{ recipe.title }}</p>
+<li style="alignment: center;font-size: 12px;margin-top: -30px; margin-bottom: 130px">von {{ recipe.author }}</li>
+<p style="margin-bottom: 60px"> <img src= "{{ recipe.image.url}}"></p>
+<p style="margin-bottom: 60px"> {{ recipe.ingr }}</p>
+<p> {{ recipe.instr }}</p>
+
+</body>
+</html>

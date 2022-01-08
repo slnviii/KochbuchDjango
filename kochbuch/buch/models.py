@@ -23,8 +23,8 @@ class Recipe(models.Model):
     ingr = models.TextField('Zutaten', max_length=500)
     instr = models.TextField('Zubereitung', max_length=10000)
     kategorien = models.ManyToManyField(Category)  # Rezept kann mehrere Kategorien haben und umgekehrt
-    zutaten = models.ManyToManyField(Zutat)  # Rezept hat mehrere Zutaten
-
+    #  zutaten = models.ManyToManyField(Zutat)  # Rezept hat mehrere Zutaten
+    author = models.CharField('Author', max_length=10, null=True, blank=True)
     def __str__(self):
         return self.title   # bild titel statt "objekt"
 
