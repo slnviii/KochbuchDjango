@@ -11,6 +11,7 @@
     {% csrf_token %}
     {{ form.as_p }}
      <p><button type="submit">Hochladen</button></p>
+    <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
 </form>
 
 </body>
