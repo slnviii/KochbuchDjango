@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -8,5 +8,4 @@ class Recipe(models.Model):
     image = models.ImageField('Bild')
     ingr = models.TextField('Zutaten', max_length=500)
     instr = models.TextField('Zubereitung', max_length=10000)
-
 

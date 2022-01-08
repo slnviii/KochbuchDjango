@@ -6,8 +6,15 @@
 </head>
 <body>
     <h1> One Kitchen</h1>
-    <p><button type="button"><a href="{% url 'upload' %}">Rezept hochladen</a></button></p>
 
+{%  if user.is_authenticated %}
+    <p> Hallo, {{ user.username }}.</p>
+    <p><button type="button"><a href="{% url 'logout_url' %}">Logout</a></button></p>
+     <p><button type="button"><a href="{% url 'upload' %}">Rezept hochladen</a></button></p>
+{% else %}
+    <p><button type="button"><a href="{% url 'login_url' %}">Login</a></button></p>
+     <p><button type="button"><a href="{% url 'upload' %}">Rezept hochladen</a></button></p>
+{% endif %}
 <ul>
 {% for recipe in recipes %}
     <li>

@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django import forms
 from . import models
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -17,7 +18,7 @@ def overview(request):
     all_recipes = models.Recipe.objects.all()
     return render(request, 'index.html', dict(recipes=all_recipes))
 
-
+@login_required()
 def upload(request):
     if request.method == "POST":
         form = RecipeForm(request.POST, request.FILES)
