@@ -28,7 +28,7 @@ def register(request):
         profile_form = ProfileForm(request.POST)
         if form.is_valid() and profile_form.is_valid():
             form.save()
-            # profile_form.data.user = form.data.user
+            # profile_form.data.user = form.data.user   # wie verknüpfen?
             profile_form.save()
             return redirect('login_url')
     else:

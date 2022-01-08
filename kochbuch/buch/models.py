@@ -10,7 +10,7 @@ class Category(models.Model):   # Kategorieklasse für Rezepte
         return self.name  # Echter name statt "Objekt"
 
 
-class Zutat(models.Model):    # Zutatenklasse
+class Zutat(models.Model):    # Zutatenklasse für später
     name = models.CharField(max_length=50)
 
     def __str__(self):

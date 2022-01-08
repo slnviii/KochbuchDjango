@@ -26,7 +26,7 @@ def upload(request):
     if request.method == "POST":
         form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():  # Formular überprüfen
-            form.instance.author = request.user
+            form.instance.author = request.user  # aktiver user wird automatisch als author des rezepts festgesetzt
             form.save()
             return HttpResponseRedirect('/')  # Umleitung
     else:
@@ -40,15 +40,15 @@ def rezepte_main(request):
 
 
 def recipe(request):
-    rec_name = request.GET['name']
-    recipe = models.Recipe.objects.get(title=rec_name)
-    return render(request, 'display_recipe.html', dict(recipe=recipe))
+    rec_name = request.GET['name']      # hier wird der name des rezepts abgefragt auf den man geklickt hat
+    recipe = models.Recipe.objects.get(title=rec_name)     # das geklickte rezept wird gleichgesetzt und als objekt abgespeichert
+    return render(request, 'display_recipe.html', dict(recipe=recipe))  # recipe object wird übergeben (s. display_recipe wie benutzt)
 
 
 def category(request):
     category_name = request.GET['name']
-    category = models.Category.objects.get(name=category_name)
-    return render(request, 'category.html', dict(category=category))
+    category = models.Category.objects.get(name=category_name)    # ähnlich recipe, aber verknüpft mit rezept über manytomany, s. models
+    return render(request, 'category.html', dict(category=category))  # dict übergeben, wird anders abgefragt, s. category.html l.41
 
 
 def post_save_receiver(sender, instance, created, **kwargs):
