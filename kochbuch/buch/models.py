@@ -10,12 +10,20 @@ class Category(models.Model):   # Kategorieklasse für Rezepte
         return self.name  # Echter name statt "Objekt"
 
 
+class Zutat(models.Model):    # Zutatenklasse
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name    # echter name statt "objekt"
+
+
 class Recipe(models.Model):
     title = models.CharField('Titel', max_length=200)
     image = models.ImageField('Bild')
     ingr = models.TextField('Zutaten', max_length=500)
     instr = models.TextField('Zubereitung', max_length=10000)
-    categories = models.ManyToManyField(Category)  # Rezept kann mehrere Kategorien haben und umgekehrt
+    kategorien = models.ManyToManyField(Category)  # Rezept kann mehrere Kategorien haben und umgekehrt
+    zutaten = models.ManyToManyField(Zutat)  # Rezept hat mehrere Zutaten
 
     def __str__(self):
         return self.title   # bild titel statt "objekt"

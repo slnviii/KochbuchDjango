@@ -5,13 +5,14 @@
     <title>Registrieren</title>
 </head>
 <body>
+    <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
     <h1> Neues Konto anlegen:</h1>
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
+        {{ profile_form.as_p }}
         <button type="submit">Register</button>
-         <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
-    </form>
+             </form>
 </body>
 </html>
