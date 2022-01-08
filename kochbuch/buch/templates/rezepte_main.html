@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+      @font-face { font-family: "OP"; src: url("../static/OP.ttf")}
+    </style>
+    <meta charset="UTF-8">
+    <title>Rezepte</title>
+</head>
+<body>
+
+<p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
+<h1 style="font-size:100px; font-family: OP; text-align: center">Alle Rezepte</h1>
+<br>
+<br>
+<br>
+{% for recipe in recipes %}
+
+    <li style="font-size: 50px; font-style:italic;font-weight: bold">{{ recipe.title }} </li><br>
+    <p>
+        <img src= "{{ recipe.image.url}}">
+    </p>
+    <p>
+        {{ recipe.ingr }}
+    </p>
+    <p>
+        {{ recipe.instr }}
+        <hr style="height:4px;color:black;background-color:black">
+    </p>
+
+
+
+
+{% endfor %}
+</ul>
+</body>
+</html>

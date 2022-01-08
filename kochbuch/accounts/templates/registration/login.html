@@ -6,20 +6,17 @@
     <title>Login</title>
 </head>
 <body>
-    <h1 style="text-align:center;color: black;border: 2px solid powderblue;padding: 1px"> System Login</h1>
+    <h1 style="display:inline;color: black;border: 2px solid powderblue;padding: 1px"> System Login</h1>
+    <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
     <form
-          style="
-                text-align:center;
-                font-family: verdana;
-                font-size: 100%
-                "
+
           method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit"
-                style="width: 115px; height: 40px; "
+                style="width: 50px; height: 30px;margin-left: 85px "
                             >Login</button>
-        <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
+
     </form>
 </body>
 </html>

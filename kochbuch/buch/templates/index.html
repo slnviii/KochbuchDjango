@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>One Kitchen</title>
+    <style>
+      @font-face { font-family: "OP"; src: url("../static/OP.ttf")}
+         </style>
+<title>One Kitchen</title>
 </head>
-<body>
-    <h1> One Kitchen</h1>
+
+<body style="background-color: Azure;">
+
 
 {%  if user.is_authenticated %}
-    <p> Hallo, {{ user.username }}.</p>
-    <p><button type="button"><a href="{% url 'logout_url' %}">Logout</a></button></p>
-     <p><button type="button"><a href="{% url 'upload' %}">Rezept hochladen</a></button></p>
+    <div style="text-align: center">
+     <p><button type="button"><a href="{% url 'logout_url' %}">Logout</a></button></p>
+    <p><button type="button"><a href="{% url 'admin:index' %}">Admin Panel</a></button></p>
+    </div>
 {% else %}
+    <div style="text-align: center">
     <p><button type="button"><a href="{% url 'login_url' %}">Login</a></button></p>
     <p><button type="button"><a href="{% url 'register_url' %}">Registrieren</a></button></p>
-     <p><button type="button"><a href="{% url 'upload' %}">Rezept hochladen</a></button></p>
+    </div>
 {% endif %}
-<ul>
-{% for recipe in recipes %}
-    <li>
-        {{ recipe.title }} <br>
-        <br>
-        <img src= "{{ recipe.image.url}}"> <br>
-        <br>
-        {{ recipe.ingr }} <br>
-        <br>
-        {{ recipe.instr }} <br>
-        <br>
-         </li>
-{% endfor %}
-</ul>
+
+<h1 style="text-align: center;font-family: OP; font-size:120px; transform: rotate(10deg); ">One Kitchen</h1>
+    {%  if user.is_authenticated %}
+    <p style="font-size:50px"> Hallo, {{ user.username }}.</p>
+    {% endif %}
+    <p><button type="button"><a href="{% url 'upload' %}">Rezept hochladen</a></button></p>
+    <p><button type="button"><a href="{% url 'rezepte_main' %}">Rezepte</a></button></p>
 
 </body>
 

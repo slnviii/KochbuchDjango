@@ -5,13 +5,13 @@
     <title>Neues Rezept</title>
 </head>
 <body>
+    <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
     <h1>Neues Rezept hochladen</h1>
 
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
      <p><button type="submit">Hochladen</button></p>
-    <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
 </form>
 
 </body>
