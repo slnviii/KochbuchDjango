@@ -21,6 +21,39 @@
 <p style="margin-bottom: 60px"> <img src= "{{ recipe.image.url}}"></p>
 <p style="margin-bottom: 60px"> {{ recipe.ingr }}</p>
 <p> {{ recipe.instr }}</p>      <!--- einziger weg um die felder abzurufen? .label dranhängen für feldbeschreibung?--->
+<p><button type="button"><a href = '#' >Zu Favoriten hinzufügen</a> </button></p>
+
+<ul>
+{% for comment in comments %}
+        <li>
+            {{ user.username }}
+            {{ comment.body }}
+        </li>
+        {% endfor %}
+</ul>
+
+{%  if user.is_authenticated %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        Ersteller: {{ user.username }}
+    {% for field in form %}
+    {% if field.name == 'author' %}
+        {{ field.as_hidden }}
+     {% else %}
+                                          <!--- alle felder werden angezeigt außer author(wird automatisch gespeichert) --->
+        <p style="font-size: 15px;font-weight: bold">
+               {{ field.label }}
+        </p>
+                {{ field }}
+
+
+
+     {% endif %}
+    {% endfor %}
+    <p><button type="submit">Kommentar hochladen</button></p>
+    {% endif %}
+
+</form>
 
 </body>
 </html>

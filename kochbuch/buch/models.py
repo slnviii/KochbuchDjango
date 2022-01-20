@@ -25,10 +25,28 @@ class Recipe(models.Model):
     kategorien = models.ManyToManyField(Category)  # Rezept kann mehrere Kategorien haben und umgekehrt
     #  zutaten = models.ManyToManyField(Zutat)  # Rezept hat mehrere Zutaten
     author = models.CharField('Author', max_length=10, null=True, blank=True)
+
     def __str__(self):
         return self.title   # bild titel statt "objekt"
+
+    favorites = models.ManyToManyField(User, related_name='favorites', blank=True)
+    comment = models.ManyToManyField(User, related_query_name= 'comment', blank=True)
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField('Avatar', upload_to="avatars")
+
+
+class Comment(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='comments')
+    author = models.CharField('Author', max_length=10, null=True, blank=True)
+    body = models.TextField('Kommentar:')
+    created = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('created',)
+
+    def __str__(self):
+        return 'Comment by {} on {}'.format(self.author, self.recipe)

@@ -12,8 +12,10 @@
 
 {%  if user.is_authenticated %} <!--- wenn user eingeloggt --->
     <div style="text-align: center">
-     <p><button type="button"><a href="{% url 'logout_url' %}">Logout</a></button></p>
+    <p><button type="button"><a href="{% url 'logout_url' %}">Logout</a></button></p>
     <p><button type="button"><a href="{% url 'admin:index' %}">Admin Panel</a></button></p>
+    <p><button type="button"><a href="{% url 'favorites' %}">Favoriten</a></button></p>
+
     </div>
 {% else %}
     <div style="text-align: center">
@@ -22,14 +24,12 @@
     </div>
 {% endif %}
 
-<h1 style="text-align: center;font-family: OP; font-size:120px; transform: rotate(10deg); ">One Kitchen</h1>
+<h1 style="text-align: center;font-family: OP; font-size:120px; transform: rotate(0deg); ">One Kitchen</h1>
     {%  if user.is_authenticated %}
     <p style="font-size:50px; text-align: center; margin-top: 30px"> Hallo, {{ user.username }}.</p>
     {% endif %}
-    <div style="text-align: center"><a href="{% url 'upload' %}"><img src="/media/dinner-recipes.png"width="300"  <!--- 2 klickbare bilder --->
-     height="300"></a>
-    <a href="{% url 'rezepte' %}"><img src="/media/rezepte.png"width="300"
-     height="300"></a></div>
+    <div style="text-align: center"><a href="{% url 'upload' %}"><img src="/media/dinner-recipes.png"width="300" height="300"></a>
+    <a href="{% url 'rezepte' %}"><img src="/media/rezepte.png"width="300" height="300"></a></div>
 
 </body>
 
