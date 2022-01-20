@@ -41,7 +41,7 @@
     {% for recipe in category.recipe_set.all %}
     <tr style="border: 1px solid black">   <!--- table rows loop, für jedes rezept in der kategorie wird 1 reihe erstellt --->
        <td style="width:150px; height:100px;"> <img src= "{{ recipe.image.url}}"style="max-height:100%; max-width:100%" /> </td>
-       <td style="width:400px;"><a href="{%  url 'recipe' %}?name={{ recipe.title }}">{{ recipe.title }}</a></td> <!---rezept ist klickbar --->
+       <td style="width:400px;"><a href="{%  url 'recipe' recipe.title %}">{{ recipe.title }}</a></td> <!---rezept ist klickbar --->
        <td style="width:150px;">   {{ recipe.author }}</td>
     </tr>
     {% endfor %}

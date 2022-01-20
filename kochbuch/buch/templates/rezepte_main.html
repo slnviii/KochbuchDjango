@@ -18,7 +18,7 @@
 <h1 style="font-size: 40px">Nach Kategorie</h1>
 
 {% for category in categories %}     <!--- alle vorhandenen kategorieren werden durchlaufen und angezeigt + klickbar --->
-    <li style="font-size: 30px;margin-left: 40px "><a href="{%  url 'category' %}?name={{ category.name }}">{{ category.name }}</a></li>
+    <li style="font-size: 30px;margin-left: 40px "><a href="{%  url 'category' category.name %}">{{ category.name }}</a></li>
 {% endfor %}
 
 </body>

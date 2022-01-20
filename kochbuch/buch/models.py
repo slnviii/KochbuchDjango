@@ -29,14 +29,13 @@ class Recipe(models.Model):
     def __str__(self):
         return self.title   # bild titel statt "objekt"
 
-    favorites = models.ManyToManyField(User, related_name='favorites', blank=True)
     comment = models.ManyToManyField(User, related_query_name= 'comment', blank=True)
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField('Avatar', upload_to="avatars")
-
+    favorites = models.ManyToManyField(Recipe, related_name='favorites', null=True, blank=True)
 
 class Comment(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='comments')

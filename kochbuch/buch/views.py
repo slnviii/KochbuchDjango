@@ -47,9 +47,9 @@ class CommentForm(forms.ModelForm):
         fields = ('author', 'body')
 
 
-def recipe(request):
-    rec_name = request.GET['name']      # hier wird der name des rezepts abgefragt auf den man geklickt hat
-    recipe = models.Recipe.objects.get(title=rec_name)  # das geklickte rezept wird gleichgesetzt und als objekt abgespeichert
+def recipe(request, recipe_name):
+    #  rec_name = request.GET['name']      # hier wird der name des rezepts abgefragt auf den man geklickt hat
+    recipe = models.Recipe.objects.get(title=recipe_name)  # das geklickte rezept wird gleichgesetzt und als objekt abgespeichert
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():  # Formular überprüfen
@@ -63,12 +63,12 @@ def recipe(request):
             return HttpResponseRedirect('/')  # Umleitung
     else:
         form = CommentForm()  # leeres Formular
-    return render(request, 'display_recipe.html', dict(form=form, recipe=recipe))
+    all_comments = models.Comment.objects.all()
+    return render(request, 'display_recipe.html', dict(form=form, recipe=recipe, comments = all_comments))
    # return render(request, 'display_recipe.html', dict(recipe=recipe))  # recipe object wird übergeben (s. display_recipe wie benutzt)
 
 
-def category(request):
-    category_name = request.GET['name']
+def category(request, category_name):
     category = models.Category.objects.get(name=category_name)    # ähnlich recipe, aber verknüpft mit rezept über manytomany, s. models
     return render(request, 'category.html', dict(category=category))  # dict übergeben, wird anders abgefragt, s. category.html l.41
 

@@ -6,7 +6,7 @@ urlpatterns = [
     path('', overview, name='overview'),
     path('upload/', upload, name='upload'),
     path('rezepte/', rezepte_main, name='rezepte'),
-    path('category', category, name='category'),
+    path('category/<category_name>', category, name='category'),
     path('favorites/', favorites, name='favorites'),
-    path('recipe/', recipe, name='recipe'),
+    path('recipe/<recipe_name>', recipe, name='recipe'),
 ]
