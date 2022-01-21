@@ -1,23 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ recipe.title }}</title>
-    <style>
+{% extends 'base.html' %}
+    {% block title %}{{ recipe.title }}{% endblock %}
 
+
+    {% block style %}
       @font-face { font-family: "OP"; src: url("../static/OP.ttf")}
-
         body{
             background-color: antiquewhite;
             text-align: center;
         }
-
-    </style>
-</head>
-<body>
+    {% endblock %}
+{% block content %}
 <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
 <p style="font-size: 35px;font-family:Verdana">{{ recipe.title }}</p>
-<li style="alignment: center;font-size: 12px;margin-top: -30px; margin-bottom: 130px">von {{ recipe.author }}</li>
+<li style="alignment: center;font-size: 12px;margin-top: -30px; margin-bottom: 50px">von {{ recipe.author }}</li>
 <p style="margin-bottom: 60px"> <img src= "{{ recipe.image.url}}"></p>
 <p style="margin-bottom: 60px"> {{ recipe.ingr }}</p>
 <p> {{ recipe.instr }}</p>      <!--- einziger weg um die felder abzurufen? .label dranhängen für feldbeschreibung?--->
@@ -51,14 +46,10 @@ Kommentare
     {% if field.name == 'author' %}
         {{ field.as_hidden }}
      {% else %}
-                                          <!--- alle felder werden angezeigt außer author(wird automatisch gespeichert) --->
         <p style="font-size: 15px;font-weight: bold">
                Dein Kommentar:
         </p>
                 {{ field }}
-
-
-
      {% endif %}
     {% endfor %}
     <p><button type="submit">Kommentar hochladen</button></p>
@@ -66,5 +57,5 @@ Kommentare
 
 </form>
 
-</body>
+{% endblock %}
 </html>

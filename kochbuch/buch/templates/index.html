@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <style>
-      @font-face { font-family: "OP"; src: url("../static/OP.ttf")}
-         </style>
-<title>One Kitchen</title>
-</head>
+{% extends 'base.html' %}
 
-<body style="background-color: Azure;">
-
+{% block content %}
 
 {%  if user.is_authenticated %} <!--- wenn user eingeloggt --->
     <div style="text-align: center">
@@ -31,6 +23,6 @@
     <div style="text-align: center"><a href="{% url 'upload' %}"><img src="/media/dinner-recipes.png"width="300" height="300"></a>
     <a href="{% url 'rezepte' %}"><img src="/media/rezepte.png"width="300" height="300"></a></div>
 
-</body>
+{% endblock %}
 
 </html>

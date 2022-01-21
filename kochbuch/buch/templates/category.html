@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <style>
+{% extends 'base.html' %}
+    {% block title %}{{ category.name }}{% endblock %}
+    {% block style %}
     body {
         color: black;
         font-size: 20px;
@@ -24,14 +22,13 @@
         border: 1px solid black;
          background-color: #f2f2f2;
     }
-    </style>
-    <title>{{ category.name }}</title>
-</head>
-<body>
+    {% endblock %}
+
+{% block content %}
 <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
 <h1>Rezepte für {{ category.name }}</h1>
 
-<table style="border: 1px solid black">  <!--- tabelle für alle rezepte dieser kategorie --->
+<table class="center" style="border: 1px solid black">  <!--- tabelle für alle rezepte dieser kategorie --->
     <tr style="font-size: 30px;border: 1px solid black">
         <th></th>
         <th style="width:400px;">Rezept</th>
@@ -46,5 +43,5 @@
     </tr>
     {% endfor %}
 </table>
-</body>
+{% endblock %}
 </html>

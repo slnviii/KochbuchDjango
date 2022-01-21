@@ -63,7 +63,7 @@ def recipe(request, recipe_name):
             return HttpResponseRedirect('/')  # Umleitung
     else:
         form = CommentForm()  # leeres Formular
-    all_comments = models.Comment.objects.all()
+    all_comments = models.Comment.objects.all()  # alle kommentare rein um weiterzugeben
     return render(request, 'display_recipe.html', dict(form=form, recipe=recipe, comments = all_comments))
    # return render(request, 'display_recipe.html', dict(recipe=recipe))  # recipe object wird übergeben (s. display_recipe wie benutzt)
 

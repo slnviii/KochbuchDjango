@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Rezepte</title>
-    <style>
+{% extends 'base.html' %}
+    {% block title %}Rezepte{% endblock %}
+
+
+    {% block style %}
         @font-face { font-family: "OP"; src: url("../static/OP.ttf")}
         body{
             background-color: antiquewhite;
         }
-    </style>
-</head>
-<body>
+    {% endblock %}
+
+{% block content %}
 
 <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
 <h1 style="font-size:100px; font-family: OP; text-align: center">Alle Rezepte</h1>
@@ -18,8 +17,8 @@
 <h1 style="font-size: 40px">Nach Kategorie</h1>
 
 {% for category in categories %}     <!--- alle vorhandenen kategorieren werden durchlaufen und angezeigt + klickbar --->
-    <li style="font-size: 30px;margin-left: 40px "><a href="{%  url 'category' category.name %}">{{ category.name }}</a></li>
+    <li style="list-style-type:none;font-size: 30px;"><a href="{%  url 'category' category.name %}">{{ category.name }}</a></li>
 {% endfor %}
 
-</body>
+{% endblock %}
 </html>
