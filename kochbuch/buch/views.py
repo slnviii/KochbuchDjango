@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404 # get_object_or_404 hinzugefügt
 from django import forms
 from . import models
@@ -6,6 +6,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from .models import Profile, Comment
 from django.contrib.auth.decorators import login_required
+import datetime
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -82,7 +83,8 @@ def favorites(request, userid):
         models.Recipe.favorites.add(request.user)
     return HttpResponseRedirect('favorites/')
 
-
+def time(request):
+    return HttpResponse(datetime.datetime.now().strftime("%H:%M:%S"))
 
 def post_save_receiver(sender, instance, created, **kwargs):
     if created:
