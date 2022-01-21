@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404 # get_object_or_404 hinzugefügt
 from django import forms
@@ -39,6 +40,7 @@ def upload(request):
 
 def rezepte_main(request):
     all_categories = models.Category.objects.all()
+
     return render(request, 'rezepte_main.html', dict(categories=all_categories))
 
 
@@ -82,6 +84,16 @@ def favorites(request, userid):
     else:
         models.Recipe.favorites.add(request.user)
     return HttpResponseRedirect('favorites/')
+
+
+def filter_form(request):
+    all_categories = models.Category.objects.all()
+    all_users = User.objects.all()
+    return render(request, 'filter.html', dict(
+        categories=all_categories,
+        users=all_users,
+    ))
+
 
 def time(request):
     return HttpResponse(datetime.datetime.now().strftime("%H:%M:%S"))

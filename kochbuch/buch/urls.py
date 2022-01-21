@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import overview, upload, rezepte_main, category, recipe, favorites, time
+from .views import overview, upload, rezepte_main, category, recipe, favorites, time, filter_form
 
 
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
     path('favorites/', favorites, name='favorites'),
     path('recipe/<recipe_name>', recipe, name='recipe'),
     path('time/', time, name='time'),
+    path('filter/', filter_form, name='filter'),
 ]

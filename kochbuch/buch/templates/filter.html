@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezepte filtern</title>
+</head>
+<body>
+
+<form action="/rezepte/" method="get">
+    <p><label>
+        Kategorie:
+        <select name="category">
+            {% for category in categories %}
+             <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </label></p>
+    <p><label>
+        Benutzer:
+        <select name="user">
+            {% for user in users %}
+             <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+        </select>
+    </label></p>
+    <p><button type="submit">Go</button></p>
+</form>
+
+</body>
+</html>
