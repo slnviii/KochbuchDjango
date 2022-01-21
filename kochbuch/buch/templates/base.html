@@ -4,12 +4,47 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'main.css' %}">
     <meta charset="UTF-8">
-    <style> {% block style %}
+    <style>
+        nav {
+        display: flex;
+        flex-wrap: wrap;
+          justify-content: center;
+
+      }
+      nav a {
+        text-decoration: none;
+        display: block;
+        padding: 15px 25px;
+        text-align: center;
+        border:1px solid black;
+        background-color: antiquewhite;
+        color: #464141;
+        margin: 0;
+        font-family: sans-serif;
+      }
+      nav a:hover {
+        background-color: #777777;
+        color: #ffffff;
+      }
+        {% block style %}
+
+
       @font-face { font-family: "OP"; src: url("../static/OP.ttf")}
     {% endblock %}</style>
     <title>{% block title %}One Kitchen{% endblock %}</title>
 </head>
 <body>
+ <nav>
+      <a href="{% url 'overview' %}">Home</a>
+      <a href="{% url 'rezepte' %}">Rezepte</a>
+      {%  if user.is_authenticated %} <!--- wenn user eingeloggt --->
+      <a href="{% url 'upload' %}">Neues Rezept hochladen</a>
+      <a href="{% url 'logout_url' %}">Logout</a>
+      {% else %}
+      <a href="{% url 'login_url' %}">Login</a>
+      <a href="{% url 'register_url' %}">Register</a>
+      {% endif %}
+    </nav>
 {% block content %}{% endblock %}
 {% block add_scripts %}{% endblock %}
 </body>

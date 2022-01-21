@@ -2,12 +2,11 @@
     {% block title %}Neues Rezept{% endblock %}
 
 {% block content %}
-    <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
     <h1 style="margin-top:40px">Neues Rezept hochladen</h1>
 
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <p style="font-size: 20px;font-weight: bold;margin-top:100px">
+    <p style="font-size: 20px;font-weight: bold;margin-top:40px">
        Ersteller: {{ user.username }}
         <hr style="height:1px;width:25%;color:black;background-color:black;">
     </p>
