@@ -24,12 +24,12 @@ class Recipe(models.Model):
     instr = models.TextField('Zubereitung', max_length=10000)
     kategorien = models.ManyToManyField(Category)  # Rezept kann mehrere Kategorien haben und umgekehrt
     #  zutaten = models.ManyToManyField(Zutat)  # Rezept hat mehrere Zutaten
-    author = models.CharField('Author', max_length=10, null=True, blank=True)
-
+    author = models.ForeignKey(User, to_field="username", db_column="username", on_delete=models.CASCADE)
+    comment = models.ManyToManyField('Comment', related_query_name='comment', blank=True)
     def __str__(self):
         return self.title   # bild titel statt "objekt"
 
-    comment = models.ManyToManyField(User, related_query_name= 'comment', blank=True)
+
 
 
 class Profile(models.Model):
