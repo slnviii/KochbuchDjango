@@ -10,7 +10,7 @@
         }
     {% endblock %}
 {% block content %}
-<p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
+
 <p style="font-size: 35px;font-family:Verdana">{{ recipe.title }}</p>
 <li style="alignment: center;font-size: 12px;margin-top: -30px; margin-bottom: 50px">von {{ recipe.author }}</li>
 <p style="margin-bottom: 60px"> <img src= "{{ recipe.image.url}}"></p>
