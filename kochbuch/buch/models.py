@@ -34,7 +34,7 @@ class Recipe(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    avatar = models.ImageField('Avatar', upload_to="avatars")
+    avatar = models.ImageField('Avatar', upload_to="avatars",default='avatars/default-avatar.jpg')
     favorite = models.ManyToManyField(Recipe, null=True)
     bio = models.TextField(null=True)
     def __str__(self):

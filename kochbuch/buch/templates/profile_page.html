@@ -4,7 +4,9 @@
 {% endblock %}
 {% block content %}
     <div style="margin-top: 30px; font-size:50px">Hallo, {{ user.username }}!</div>
-<span><img src= "{{ user.profile.avatar.url }}"style="margin-top: 10px; width:150px; height:150px;max-height:100%; max-width:100%" /></span>
+
+        <span><img src= "{{ user.profile.avatar.url }}"style="margin-top: 10px; width:150px; height:150px;max-height:100%; max-width:100%" /></span>
+
     <div><button type="button"><a href="{% url 'admin:index' %}">Avatar ändern...</a></button></div>
 
     <div style="margin-top:20px; font-size: 25px; font-family:Castellar;">Deine Beschreibung</div>
