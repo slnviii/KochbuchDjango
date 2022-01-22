@@ -2,6 +2,7 @@
 Kochbuch app für Python Kurs
 https://miro.com/app/board/o9J_lmER22A=/  
 Code Anleitung https://cloud.hs-augsburg.de/s/FSPxopKBnfXp3FS
+Standardpasswort für alle User: !abcd1234
 
 ## "Wie kriege ich dieses Repository das erste mal in mein Pycharm?"  
 -> Pycharm Clone Funktion  
