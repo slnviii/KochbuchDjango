@@ -19,7 +19,7 @@ class ProfileForm(forms.ModelForm):
     """Klasse zur Formularerstellung."""
     class Meta:
         model = models.Profile
-        exclude = ['user', 'favorites']
+        exclude = ['user', 'favorite']
 
 
 def register(request):

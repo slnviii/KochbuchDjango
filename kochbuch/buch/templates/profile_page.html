@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+    One Kitchen - Profile
+{% endblock %}
+{% block content %}
+    <div style="margin-top: 30px; font-size:50px">Hallo, {{ user.username }}!</div>
+<span><img src= "{{ user.profile.avatar.url }}"style="margin-top: 10px; width:150px; height:150px;max-height:100%; max-width:100%" /></span>
+    <div><button type="button"><a href="{% url 'admin:index' %}">Avatar ändern...</a></button></div>
+
+    <div style="margin-top:20px; font-size: 25px; font-family:Castellar;">Deine Beschreibung</div>
+    <div style="border: solid black 1px;display:inline-block; height: 100px; width:500px;background-color: #d9d2b0">
+    <div style="font-family: 'Segoe Print';margin-top:5px;">{{ user.profile.bio }}</div>
+    </div>
+    <hr style="width: 550px; border-style: dotted none none; border-width: 3px; border-color: #949182;">
+
+   <div style="margin-top:20px; font-size: 25px; font-family:Castellar;">Deine Favoriten</div>
+    <div style="border: solid black 1px;display:inline-block;background-color: #d9d2b0">
+    {% for favorite in user.profile.favorite.all %}
+      <div style="position: relative;text-align: center; display:table-cell; padding:1px;">
+          <a href="{% url 'recipe' favorite %}"><img src="{{favorite.image.url}}"style="max-height:200px; max-width:200px;border: solid black 2px"></a>
+          <div style="position: absolute;top: 60%;left: 50%;transform: translate(-50%, -50%);"><a href="{%  url 'recipe' favorite %}"style="font-family:impact;font-size: 25px;color:white; text-decoration: none;-webkit-text-stroke-width: 1px;-webkit-text-stroke-color: black;">{{ favorite }}</a></div>
+      </div>
+    {% endfor %}
+    </div>
+
+
+{% endblock %}
+
+
+

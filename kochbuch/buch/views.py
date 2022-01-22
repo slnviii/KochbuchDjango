@@ -44,6 +44,13 @@ def rezepte_main(request):
     return render(request, 'rezepte_main.html', dict(categories=all_categories))
 
 
+@login_required()
+def profile_view(request):
+    all_recipes = models.Recipe.objects.all()
+
+    return render(request, 'profile_page.html', dict(recipes=all_recipes))
+
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -76,14 +83,14 @@ def category(request, category_name):
     return render(request, 'category.html', dict(category=category))  # dict übergeben, wird anders abgefragt, s. category.html l.41
 
 
-@login_required()
-def favorites(request, userid):
-    favorites = get_object_or_404(RecipeForm, userid=userid)
-    if models.Recipe.favorites.filter(userid=request.user.id).exists():
-        models.Recipe.favorites.remove(request.user)
-    else:
-        models.Recipe.favorites.add(request.user)
-    return HttpResponseRedirect('favorites/')
+# @login_required()
+# def favorites(request, userid):
+#     favorites = get_object_or_404(RecipeForm, userid=userid)
+#     if models.Recipe.favorites.filter(userid=request.user.id).exists():
+#         models.Recipe.favorites.remove(request.user)
+#     else:
+#         models.Recipe.favorites.add(request.user)
+#     return HttpResponseRedirect('favorites/')
 
 
 def filter_form(request):

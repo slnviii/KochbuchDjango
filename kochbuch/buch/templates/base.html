@@ -28,13 +28,13 @@
         color: #ffffff;
       }
       @font-face { font-family: "OP"; src: url("../static/OP.ttf")}
-        {% block style %}
+
             body {
                 background-color: antiquewhite;
                 font-family: Verdana;
-                text-align: center;
+                text-align: center;{% block style %}{% endblock %}
             }
-        {% endblock %}</style>
+        </style>
 
     <title>{% block title %}One Kitchen{% endblock %}</title>
 </head>

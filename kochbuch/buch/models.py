@@ -33,9 +33,12 @@ class Recipe(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     avatar = models.ImageField('Avatar', upload_to="avatars")
-    favorites = models.ManyToManyField(Recipe, related_name='favorites', null=True, blank=True)
+    favorite = models.ManyToManyField(Recipe, null=True)
+    bio = models.TextField(null=True)
+    def __str__(self):
+        return str(self.user)
 
 class Comment(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='comments')
