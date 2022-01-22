@@ -25,13 +25,13 @@ class ProfileForm(forms.ModelForm):
 def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
-        profile_form = ProfileForm(request.POST)
-        if form.is_valid() and profile_form.is_valid():
+       # profile_form = ProfileForm(request.POST)
+        if form.is_valid():  # and profile_form.is_valid():
             form.save()
             # profile_form.data.user = form.data.user   # wie verknüpfen?
-            profile_form.save()
+           # profile_form.save()
             return redirect('login_url')
     else:
         form = UserCreationForm()
-        profile_form = ProfileForm()
-    return render(request, 'registration/register.html', dict(form=form, profile_form=profile_form))
+        # profile_form = ProfileForm()
+    return render(request, 'registration/register.html', dict(form=form))  # , profile_form=profile_form))
