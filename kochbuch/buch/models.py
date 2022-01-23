@@ -10,6 +10,20 @@ class Category(models.Model):   # Kategorieklasse für Rezepte
         return self.name  # Echter name statt "Objekt"
 
 
+class Theme(models.Model):   #Themenklasse für Rezepte
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name  # Echter name statt "Objekt"
+
+
+class Tag(models.Model):   #Tagklasse für Rezepte
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name  # Echter name statt "Objekt"
+
+
 class Zutat(models.Model):    # Zutatenklasse für später
     name = models.CharField(max_length=50)
 
@@ -23,12 +37,20 @@ class Recipe(models.Model):
     ingr = models.TextField('Zutaten', max_length=500)
     instr = models.TextField('Zubereitung', max_length=10000)
     kategorien = models.ManyToManyField(Category)  # Rezept kann mehrere Kategorien haben und umgekehrt
-    #  zutaten = models.ManyToManyField(Zutat)  # Rezept hat mehrere Zutaten
+    thema = models.ForeignKey(Theme, null=True, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag, null=True)
+    #zutaten = models.ManyToManyField(Zutat)  # Rezept hat mehrere Zutaten
     author = models.ForeignKey(User, to_field="username", db_column="username", on_delete=models.CASCADE)
     comment = models.ManyToManyField('Comment', related_query_name='comment', blank=True)
+    dauer = models.IntegerField('Dauer',default="30")
+    schwierigkeit = models.CharField(max_length=15, choices=(('superleicht','Sehr leicht'),('leicht','Leicht'),('mittel','Mittel'),('schwer','Schwer')),default='leicht')
+    #bewertet = models.ManyToManyField('Rating', null=True)
     def __str__(self):
         return self.title   # bild titel statt "objekt"
 
+
+# class Rating(models.Model):
+#     bewertung = models.IntegerField(max_length=1, choices=(('0', '0 Sterne'),('1', '1 Stern'),('2', '2 Sterne'),('3', '3 Sterne'),('4', '4 Sterne'),('5', '5 Sterne')),default="0")
 
 
 

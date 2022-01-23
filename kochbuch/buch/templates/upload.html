@@ -1,31 +1,65 @@
 {% extends 'base.html' %}
     {% block title %}Neues Rezept - One Kitchen{% endblock %}
-
+{% block style %}
+{% endblock %}
 {% block content %}
     <h1 style="margin-top:40px">Neues Rezept hochladen</h1>
 
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <p style="font-size: 20px;font-weight: bold;margin-top:40px">
+    <p style="font-size: 20px;font-weight: bold;margin-top:20px">
        Ersteller: {{ user.username }}
-        <hr style="height:1px;width:25%;color:black;background-color:black;">
-    </p>
-    {% for field in form %}
-    {% if field.name == 'author' %}
-        {{ field.as_hidden }}
-     {% elif field.name == 'comment' %}
-        {{ field.as_hidden }}
-     {% else %}
-                                          <!--- alle felder werden angezeigt außer author(wird automatisch gespeichert) --->
-            <p style="font-size: 20px;font-weight: bold">
-               {{ field.label }}
-            </p>
-                {{ field }}
-         <hr style="height:1px;width:25%;color:black;background-color:black;">
 
-     {% endif %}
-    {% endfor %}
-     <p><button class="button" type="submit">Hochladen</button></p>
+    </p>
+ <div style="">
+     <div style="background-color: #E5D9C9;width: 430px;display: inline-block;border: 1px solid black;margin-right:-5px">
+        <p>
+            <ul>Rezepttitel</ul>
+            <ul>{{ form.title }}</ul>
+        </p>
+        <p style="border: 1px solid black;">
+            <ul style="">Zutaten</ul>
+            <ul>{{ form.ingr }}</ul>
+        </p>
+        <p style="border: 1px solid black;">
+            <ul>Zubereitung</ul>
+            <ul>{{ form.instr }}</ul>
+        </p>
+        <p style="border: 1px solid black;">
+            <ul>Dauer in Minuten</ul>
+            <ul>{{ form.dauer }}</ul>
+        </p>
+     </div>
+     <div style="background-color: #E5D9C9;width: 430px;display: inline-block;border: 1px solid black;">
+        <p  style="margin-top:35px">
+            <ul style="">Eine oder mehrere Kategorien wählen(ctrl click)</ul>
+            <ul>{{ form.kategorien }}</ul>
+        </p>
+        <p style="border: 1px solid black">
+            <ul>Ein Thema wählen</ul>
+            <ul>{{ form.thema }}</ul>
+        </p>
+        <p style="border: 1px solid black">
+            <ul>Ein oder mehrere Tags wählen(ctrl click)</ul>
+            <ul>{{ form.tags }}</ul>
+        </p>
+        <p style="">
+            <ul>Dein Tag ist nicht dabei?</ul>
+            <ul>Füge es hier hinzu</ul>
+        </p>
+        <p style="border: 1px solid black">
+            <ul>Schwierigkeit wählen(ctrl click)</ul>
+            <ul>{{ form.schwierigkeit }}</ul>
+        </p>
+        <p style="border: 1px solid black;">
+            <ul>Bitte lade ein Bild hoch</ul>
+            <ul>{{ form.image }}</ul>
+        </p>
+    </div>
+
+ </div>
+ <div style="margin-top: 10px"><button class="button" type="submit">Hochladen</button></div>
+
 </form>
 
 {% endblock %}

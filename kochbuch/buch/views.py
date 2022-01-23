@@ -51,7 +51,6 @@ def rezepte_main(request):
     return render(request, 'rezepte_main.html', dict(categories=all_categories))
 
 
-
 @login_required()
 def profile_view(request):
     storage = messages.get_messages(request)
