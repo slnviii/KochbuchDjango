@@ -6,14 +6,53 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <meta charset="UTF-8">
     <style>
-
-
+    .button {
+          background-color: #81DB74; /* Green */
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 12px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+            border: 2px solid black;
+        }
+     .button:hover {
+        background-color: #4CAF50;
+        color: white;}
+    .buttonblue {background-color: #A5D0FF;}
+    .buttonblue:hover {
+        background-color: #008CBA;
+        color: white;}
+    .buttonred {background-color: #f44336;}
+    .buttonred:hover {
+        background-color: #C11913;
+        color: white;}
+    .buttongray {background-color: #D9DDE0;color:black}
+    .buttongray:hover {
+        background-color: #e7e7e7;
+        color: black;}
+    .buttonblack {background-color: #555555;}
+    .buttonblack:hover {
+        background-color: #7B7D7F;
+        color: white;}
+    .buttonlightgreen {background-color: #B2E094;color:black}
+    .buttonlightgreen:hover {
+        background-color: #97BC7E;
+        color: black;}
+    .buttonlightblue {background-color: #9BD7DD;color:black}
+    .buttonlightblue:hover {
+        background-color: #75A1A5;
+        color: black;}
 .dropbtn {
   display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;
 }
 
 li a:hover, .dropdown:hover .dropbtn {
-  background-color: darkgoldenrod;
+  background-color: #C6A385;
 }
 
 li.dropdown {
@@ -23,9 +62,10 @@ li.dropdown {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: #997C68;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
   z-index: 1;
 }
 
@@ -33,6 +73,7 @@ li.dropdown {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
+    border: 1px solid black;
   display: block;
   text-align: left;
 }
@@ -57,30 +98,34 @@ li.dropdown {
 
 <body>
 <ul style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;background-color: #333;">
-    <li style="float:left;"><span style="font-size:30px; display:inline-block;color: white;text-align: center; padding: 5px 15px; text-decoration: none;font-family: OP;">One Kitchen</span></li>
+    <li style="float:left;border-right: 1px solid #bbb;"><span style="font-size:30px; display:inline-block;color: white;text-align: center; padding: 5px 15px; text-decoration: none;font-family: OP;">One Kitchen</span></li>
     <li style="float:left;"><span style="font-size:15px; display:inline-block;color: white;text-align: center; padding: 5px 5px; text-decoration: none;" id="time"></span></li>
 
 
-    <li style="display: inline-block;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'overview' %}">Home</a></li>
-    <li style="display: inline-block;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'rezepte' %}">Rezepte</a></li>
+    <li style="display: inline-block;border-right: 1px solid #bbb;border-left: 1px solid #bbb;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'overview' %}">Home</a></li>
+    <li style="display: inline-block;border-right: 1px solid #bbb;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'rezepte' %}">Rezepte</a></li>
         {%  if user.is_authenticated %} <!--- wenn user eingeloggt --->
-    <li style="display: inline-block;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'upload' %}">Neues Rezept hochladen</a></li>
-    <li style="float: right"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'logout_url' %}">Logout</a></li>
-    <li style="float: right"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'profile' %}">Profil</a></li>
-    <li style="float: right"><img src= "{{ user.profile.avatar.url }}"style="max-height:40px; max-width:40px%" /></li>
-    <li style="float:right;"><span style="font-size:22px; display:inline-block;color: white;text-align: center; padding: 5px 5px; text-decoration: none;">Hallo, {{ user.username }}!</span></li>
+    <li style="display: inline-block;border-right: 1px solid #bbb;;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'upload' %}">Neues Rezept hochladen</a></li>
+
+    <li style= "float:right;border-left: 2px solid #bbb;" class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Profil</a>
+            <div style="left: 90%;right: auto;border: 1px solid black;"class="dropdown-content">
+              <a href="{% url 'profile' %}">Mein Profil</a>
+              <a href="{% url 'edit_profile' %}">Profil bearbeiten</a>
+                {% if user.is_superuser %}
+                    <a href="{% url 'admin:index' %}">Admin Panel</a>
+                {% endif %}
+              <a href="{% url 'logout_url' %}">Logout</a>
+            </div>
+    </li>
+
+    <li style="float: right"><img src= "{{ user.profile.avatar.url }}"style="max-height:50px; max-width:50px" /></li>
+    <li style="float:right;border-right: 3px solid #bbb;border-left: 1px solid #bbb;"><span style="font-size:22px; display:inline-block;color: white;text-align: center; padding: 5px 5px; text-decoration: none;">Hallo, {{ user.username }}!</span></li>
         {% else %}
-    <li style="float: right"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'login_url' %}">Login</a></li>
+    <li style="float: right;border-right: 1px solid #bbb;border-left: 1px solid #bbb;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'login_url' %}">Login</a></li>
     <li style="float: right"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'register_url' %}">Register</a></li>
         {% endif %}
-    <li class="dropdown">
-    <a href="javascript:void(0)" class="dropbtn">unused Dropdown</a>
-    <div class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-    </div>
-  </li>
+
 </ul>
 
 {% block content %}{% endblock %}
@@ -103,7 +148,10 @@ li.dropdown {
     }
     showTime();
     setInterval(showTime, 1000);
+    {% block add_scripts %}{% endblock %}
+
+
 </script>
-{% block add_scripts %}{% endblock %}
+
 </body>
 </html>

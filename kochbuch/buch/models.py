@@ -40,6 +40,8 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user)
 
+
+
 class Comment(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='comments')
     author = models.CharField('Author', max_length=10, null=True, blank=True)

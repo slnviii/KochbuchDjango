@@ -2,43 +2,18 @@
 {% block title %}Home - One Kitchen{% endblock %}
 {% block content %}
 
-    <p><button type="button"><a href="{% url 'admin:index' %}">Admin Panel</a></button></p>
-
 <h1 style="text-align: center;font-family: OP; font-size:120px; transform: rotate(6deg); ">One Kitchen</h1>
-    {%  if user.is_authenticated %}
-    <div style="font-size:50px; text-align: center; margin-top: 10px"> <span style="">Hallo, {{ user.username }}!</span>
-       {%  if not user.profile.avatar %}
-          <span><button type="button"><a href="{% url 'profile' %}">Avatar hochladen</a></button></span>
-       {% else %}
-           <span><img src= "{{ user.profile.avatar.url }}"style="width:50px; height:50px;max-height:100%; max-width:100%" /></span>
-       {% endif %}
+    {% if not user.is_authenticated %}
+    <div style="margin-bottom: 30px">
+        <a href="{% url 'login_url' %}"><button style="font-size:18px;padding: 20px 38px;"class="buttonlightgreen button">Login</button></a>
+        <a href="{% url 'register_url' %}"><button style="font-size:18px;padding: 20px 38px;"class="buttonlightblue button" >Registrieren</button></a>
+
     </div>
     {% endif %}
-
-    <span id="time"></span>
     <div style="text-align: center"><a href="{% url 'upload' %}"><img src="/media/dinner-recipes.png"width="300" height="300"></a>
     <a href="{% url 'rezepte' %}"><img src="/media/rezepte.png"width="300" height="300"></a></div>
 
 {% endblock %}
 {% block add_scripts %}
-    <script>
-    const timeEle = document.getElementById('time');
-    function showTime() {
-        fetch('/time').then((response) => {
-            if (!response.ok){
-                throw new Error('Loading failed');
-            }
-            else {
-                return response.text()
-            }
-        }).then((timeText) => {
-            timeEle.innerHTML = timeText;
-        }).catch(error => {
-            console.error(error);
-    })
 
-    }
-    showTime();
-    setInterval(showTime, 1000);
-    </script>
 {% endblock %}

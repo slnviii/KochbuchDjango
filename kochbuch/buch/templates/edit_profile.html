@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+    {% block title %}Edit Profile - One Kitchen{% endblock %}
+
+{% block content %}
+<h1> Profil bearbeiten</h1>
+
+        <div>
+        <img src= "{{ user.profile.avatar.url }}"style="margin-top: 10px; max-height:150px; max-width:150px" />
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <div class="col-md-5">
+                    <div>
+                        <label>Avatar ändern</label>
+                        {{ profile_form.avatar }}
+                    </div>
+                <div style="margin-top: 10px"><label>Bio:</label> {{ profile_form.bio }}</div>
+
+            </div>
+            <br><br>
+            <button class="button"type="submit">Update!</button>
+            <button class="button buttonred" type="reset">Reset</button>
+                </div>
+
+        </form>
+         <div style="margin-top: 10px">
+             <a href="{% url 'change_password' %}"><button class="button buttongray">Passwort ändern</button></a>
+         </div>
+{% endblock %}
+</html>

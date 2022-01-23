@@ -1,12 +1,19 @@
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404 # get_object_or_404 hinzugefügt
 from django import forms
+from django.urls import reverse_lazy
+from django.views import generic
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordChangeView
+from .forms import UpdateProfileForm
 from . import models
 from django.conf import settings
 from django.db.models.signals import post_save
 from .models import Profile, Comment
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 import datetime
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,12 +51,32 @@ def rezepte_main(request):
     return render(request, 'rezepte_main.html', dict(categories=all_categories))
 
 
+
 @login_required()
 def profile_view(request):
+    storage = messages.get_messages(request)
     all_recipes = models.Recipe.objects.all()
 
-    return render(request, 'profile_page.html', dict(recipes=all_recipes))
+    return render(request, 'profile_page.html',  dict(recipes=all_recipes, message=storage))
 
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.success(request,"Successfully Changed Your Profile")
+            return HttpResponseRedirect('/profile/')
+    else:
+        profile_form = UpdateProfileForm(instance=request.user.profile)
+
+    return render(request, 'edit_profile.html', {'profile_form': profile_form})
+
+class ChangePasswordView(PasswordChangeView):
+    template_name = 'change_password.html'
+    success_url = reverse_lazy('profile')
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -104,6 +131,7 @@ def filter_form(request):
 
 def time(request):
     return HttpResponse(datetime.datetime.now().strftime("%H:%M:%S"))
+
 
 def post_save_receiver(sender, instance, created, **kwargs):
     if created:

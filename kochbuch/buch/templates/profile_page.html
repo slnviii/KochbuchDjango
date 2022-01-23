@@ -3,11 +3,22 @@
     Profil - One Kitchen
 {% endblock %}
 {% block content %}
+
     <div style="margin-top: 30px; font-size:50px">Hallo, {{ user.username }}!</div>
+    {% if messages %}
 
-        <span><img src= "{{ user.profile.avatar.url }}"style="margin-top: 10px; width:150px; height:150px;max-height:100%; max-width:100%" /></span>
+                {% for message in messages %}
+                  {{ message }}
+                {% endfor %}
 
-    <div><button type="button"><a href="{% url 'admin:index' %}">Avatar ändern...</a></button></div>
+        {% endif %}
+    <div style="margin-left:20%;margin-top:10px">
+
+     <a href="{% url 'edit_profile' %}"><button class="button buttongray">Profil bearbeiten</button></a>
+
+    </div>
+
+        <span><img src= "{{ user.profile.avatar.url }}"style="margin-top: 10px;max-height:150px; max-width:150px" /></span>
 
     <div style="margin-top:20px; font-size: 25px; font-family:Castellar;">Deine Beschreibung</div>
     <div style="border: solid black 1px;display:inline-block; height: 100px; width:500px;background-color: #d9d2b0">
@@ -24,6 +35,7 @@
       </div>
     {% endfor %}
     </div>
+
 
 
 {% endblock %}

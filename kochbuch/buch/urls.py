@@ -1,6 +1,5 @@
 from django.urls import path
-from .views import overview, upload, rezepte_main, category, recipe, time, filter_form, profile_view
-
+from .views import *
 
 urlpatterns = [
     path('', overview, name='overview'),
@@ -12,4 +11,6 @@ urlpatterns = [
     path('time/', time, name='time'),
     path('filter/', filter_form, name='filter'),
     path('profile/', profile_view, name='profile'),
+    path('editprofile/', edit_profile, name='edit_profile'),
+    path('change-password/', ChangePasswordView.as_view(), name='change_password'),
 ]
