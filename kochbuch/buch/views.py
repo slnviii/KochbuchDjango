@@ -21,7 +21,7 @@ def overview(request):
     all_recipes = models.Recipe.objects.all()
     return render(request, 'index.html', dict(recipes=all_recipes))
 
-@login_required()
+#@login_required()
 def upload(request):
     if request.method == "POST":
         form = RecipeForm(request.POST, request.FILES)

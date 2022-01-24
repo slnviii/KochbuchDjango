@@ -1,26 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    .header{
+        width: 100%;
+        height: 80px;
+        display: block;
+        background-color: rgb(255,245,238);;
+    }
+    .inner_header{
+        width: 1000px;
+        height: 100%;
+        display: block;
+        margin: 0 auto ;
+    }
+    .logo_container{
+        height: 100%;
+        display: table;
+        float: left;
+    }
+    .logo_container h1{
+        color: Black;
+        height: 100%;
+        display: table-cell;
+        vertical-align: middle;
+        font-family: "Nunito";
+        font-size: 32px;
+        font-weight: 200;
+    }
+    .logo_container h1 span{
+        font-weight: 800;
+    }
+    .navigation{
+        float:right;
+        height: 100%;
+    }
+    .navigation a{
+        height: 100%;
+        display: table;
+        float:left;
+        padding: 0px 20px;
+        margin-top: -5px;
+    }
+    .navigation a li{
+        display: table-cell;
+        vertical-align: middle;
+        height: 100%;
+        color: Black;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    .home_page{
+        height: 30px;
+    }
+    .recipe_container{
+        height: 100%;
+        max-width: 60%;
+        margin-top: 4%;
+        margin-left: 10%;
+        vertical-align: middle;
+        font-family: "Nunito";
+    }
+    .recipe_container span{
+        font-weight: 800;
+    }
+    .recipe_img{
+        margin-left:30%;
+    }
+    .recipe_author{
+        margin-left:30%;
+        font-weight: 200;
+    }
+    .recipe_ingr{
+        margin-left:30%;
+        font-weight: 200;
+    }
+    .recipe_prep{
+        margin-left:30%;
+        font-weight: 200;
+    }
+    .print_recipe{
+        margin-left:30%;
+        font-weight: 200;
+        float: right;
+        margin-top: 0%;
+    }
+</style>
+
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:wght@200;279&display=swap" rel="stylesheet">
     <title>{{ recipe.title }}</title>
-    <style>
 
-      @font-face { font-family: "OP"; src: url("../static/OP.ttf")}
-
-        body{
-            background-color: antiquewhite;
-            text-align: center;
-        }
-
-    </style>
 </head>
+
 <body>
-<p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
-<p style="font-size: 35px;font-family:Verdana">{{ recipe.title }}</p>
-<li style="alignment: center;font-size: 12px;margin-top: -30px; margin-bottom: 130px">von {{ recipe.author }}</li>
-<p style="margin-bottom: 60px"> <img src= "{{ recipe.image.url}}"></p>
-<p style="margin-bottom: 60px"> {{ recipe.ingr }}</p>
-<p> {{ recipe.instr }}</p>      <!--- einziger weg um die felder abzurufen? .label dranhängen für feldbeschreibung?--->
+
+<div class="header">
+    <div class ="inner_header">
+        <div class="logo_container">
+            <h1><span>{{ recipe.title }}</span> Rezept</h1>
+        </div>
+        <ul class="navigation">
+            <a href="{% url 'overview' %}"><li><img class="home_page" src="/media/home.png"></li></a>
+        </ul>
+    </div>
+</div>
+
+
+<div class="recipe_container">
+    <p class="recipe_img"> <img src= "{{ recipe.image.url}}"></p>
+    <p class="recipe_author">von <span>{{ recipe.author }}</span></p>
+    <p class="recipe_ingr"><span>Zutaten: </span>{{ recipe.ingr }}</p>
+    <p class="recipe_prep"><span>Zubereitung:</span><br/>-->{{ recipe.instr }}</p>
+    <!--- einziger weg um die felder abzurufen? .label dranhängen für feldbeschreibung?--->
+    <p class="print_recipe"> <a><img src="/media/print.png"></a></p>
+
+</div>
 
 </body>
 </html>

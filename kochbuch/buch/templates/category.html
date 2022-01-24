@@ -1,50 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <style>
-    body {
-        color: black;
+<style>
+    .header{
+        width: 100%;
+        height: 80px;
+        display: block;
+        background-color: rgb(255,245,238);;
+    }
+    .inner_header{
+        width: 1000px;
+        height: 100%;
+        display: block;
+        margin: 0 auto ;
+    }
+    .logo_container{
+        height: 100%;
+        display: table;
+        float: left;
+    }
+    .logo_container h1{
+        color: Black;
+        height: 100%;
+        display: table-cell;
+        vertical-align: middle;
+        font-family: "Nunito";
+        font-size: 32px;
+        font-weight: 200;
+    }
+    .logo_container h1 span{
+        font-weight: 800;
+    }
+    .navigation{
+        float:right;
+        height: 100%;
+    }
+    .navigation a{
+        height: 100%;
+        display: table;
+        float:left;
+        padding: 0px 20px;
+        margin-top: -5px;
+    }
+    .navigation a li{
+        display: table-cell;
+        vertical-align: middle;
+        height: 100%;
+        color: Black;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    .home_page{
+        height: 30px;
+    }
+    .recipes_container{
+        margin-top:5%;
+        margin-left: 20%;
         font-size: 20px;
-        background-color: antiquewhite;
+        font-family: "Nunito";
     }
-
-    table {
-        overflow: hidden;
-        border-collapse: collapse;
-        position: relative;
+    .recipes_container span{
+        font-weight: 800;
     }
-    td {
-        border: 1px solid black;
-        font-size: 20px;
-        text-align: center;
-        background-color: azure;
-    }
-     th {
-        border: 1px solid black;
-         background-color: #f2f2f2;
+    .recipe_img{
+        height: 250px;
+        width: 250px;
     }
     </style>
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:wght@200;279&display=swap" rel="stylesheet">
     <title>{{ category.name }}</title>
 </head>
+
 <body>
-<p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
-<h1>Rezepte für {{ category.name }}</h1>
 
-<table style="border: 1px solid black">  <!--- tabelle für alle rezepte dieser kategorie --->
-    <tr style="font-size: 30px;border: 1px solid black">
-        <th></th>
-        <th style="width:400px;">Rezept</th>
-        <th>Author</th>
-    </tr>
+<div class="header">
+    <div class ="inner_header">
+        <div class="logo_container">
+            <h1>Rezepte für <span>{{ category.name }}</span></h1>
+        </div>
+        <ul class="navigation">
+            <a href="{% url 'overview' %}"><li><img class="home_page" src="/media/home.png"></li></a>
+        </ul>
+    </div>
+</div>
 
+<div  class="recipes_container">
     {% for recipe in category.recipe_set.all %}
-    <tr style="border: 1px solid black">   <!--- table rows loop, für jedes rezept in der kategorie wird 1 reihe erstellt --->
-       <td style="width:150px; height:100px;"> <img src= "{{ recipe.image.url}}"style="max-height:100%; max-width:100%" /> </td>
-       <td style="width:400px;"><a href="{%  url 'recipe' %}?name={{ recipe.title }}">{{ recipe.title }}</a></td> <!---rezept ist klickbar --->
-       <td style="width:150px;">   {{ recipe.author }}</td>
-    </tr>
+        <p>
+         <a href="{%  url 'recipe' %}?name={{ recipe.title }}"><img src= "{{ recipe.image.url}}" class="recipe_img"/><br/></a>
+         <span>{{ recipe.title }}</span><br/>
+         von {{ recipe.author }}
+        </p>
     {% endfor %}
-</table>
+
+</div>
+
 </body>
+
 </html>

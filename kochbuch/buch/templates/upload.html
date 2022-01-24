@@ -1,34 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    .header{
+        width: 100%;
+        height: 80px;
+        display: block;
+        background-color: rgb(255,245,238);
+    }
+    .inner_header{
+        width: 1000px;
+        height: 100%;
+        display: block;
+        margin: 0 auto ;
+    }
+    .logo_container{
+        height: 100%;
+        display: table;
+        float: left;
+    }
+    .logo_container h1{
+        color: Black;
+        height: 100%;
+        display: table-cell;
+        vertical-align: middle;
+        font-family: "Nunito";
+        font-size: 32px;
+        font-weight: 200;
+    }
+    .logo_container h1 span{
+        font-weight: 800;
+    }
+    .navigation{
+        float:right;
+        height: 100%;
+    }
+    .navigation a{
+        height: 100%;
+        display: table;
+        float:left;
+        padding: 0px 20px;
+        margin-top: -5px;
+    }
+    .navigation a li{
+        display: table-cell;
+        vertical-align: middle;
+        height: 100%;
+        color: Black;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    .home_page{
+        height: 30px;
+    }
+    .download_container{
+        height: 100%;
+        max-width: 60%;
+        margin-top: 4%;
+        margin-left: 22%;
+        vertical-align: middle;
+        font-family: "Nunito";
+        font-size: 18px;
+    }
+    .download_container label{
+        font-weight: 800;
+    }
+    .download_container input{
+        padding: 5px;
+        font-family: "Nunito";
+        font-size: 16px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+        width: 300px;
+    }
+    #id_image{
+        border: 0px;
+    }
+    .download_container textarea{
+        padding: 5px;
+        height: 150px;
+        width: 400px;
+        font-family: "Nunito";
+        font-size: 16px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+    }
+    .download_container select{
+        padding: 5px;
+        height: 100px;
+        width: 400px;
+        font-family: "Nunito";
+        font-size: 16px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+    }
+    .download_container select option{
+        padding: 5px;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    .download_container select option hover{
+       background-color: rgb(255,245,238);
+    }
+    .recipe_fields_label, .author{
+        font-weight: 800;
+    }
+    .download_btn{
+        width: 100px;
+        height: 35px;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+
+
+</style>
+
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:wght@200;279&display=swap" rel="stylesheet">
     <title>Neues Rezept</title>
 </head>
 <body>
-    <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
-    <h1 style="margin-top:40px">Neues Rezept hochladen</h1>
 
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p style="font-size: 20px;font-weight: bold;margin-top:100px">
-       Ersteller: {{ user.username }}
-        <hr style="height:1px;width:25%;color:black;background-color:black;margin-left:0;">
-    </p>
-    {% for field in form %}
-    {% if field.name == 'author' %}
-        {{ field.as_hidden }}
-     {% else %}
-                                          <!--- alle felder werden angezeigt außer author(wird automatisch gespeichert) --->
-            <p style="font-size: 20px;font-weight: bold">
-               {{ field.label }}
-            </p>
-                {{ field }}
-         <hr style="height:1px;width:25%;color:black;background-color:black;margin-left:0;">
+<div class="header">
+    <div class ="inner_header">
+        <div class="logo_container">
+            <h1><span>Neues Rezept </span> hochladen</h1>
+        </div>
+        <ul class="navigation">
+            <a href="{% url 'overview' %}"><li><img  class="home_page" src="/media/home.png"></li></a>
+        </ul>
+    </div>
+</div>
 
-     {% endif %}
-    {% endfor %}
-     <p><button type="submit">Hochladen</button></p>
-</form>
+<div class="download_container">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!--<p style="font-size: 20px;font-weight: bold;margin-top:100px">-->
+        <p class="author">Ersteller: {{ user.username }}
+        <!--<hr style="height:1px;width:25%;color:black;background-color:black;margin-left:0;">-->
+        </p>
+
+        {% for field in form %}
+            {% if field.name == 'author' %}
+                {{ field.as_hidden }}
+            {% else %}
+                <!--- alle felder werden angezeigt außer author(wird automatisch gespeichert) --->
+                <p class="recipe_fields_label"> {{ field.label }}:
+                <p class="recipe_fields"> {{ field }} </p>
+                </p>
+                <!--<p style="font-size: 20px;font-weight: bold">{{ field.label }}</p>-->
+                <!--<hr style="height:1px;width:25%;color:black;background-color:black;margin-left:0;">-->
+
+            {% endif %}
+        {% endfor %}
+        <p><button type="submit" class="download_btn">Hochladen</button></p>
+
+    </form>
+
+</div>
 
 </body>
 </html>

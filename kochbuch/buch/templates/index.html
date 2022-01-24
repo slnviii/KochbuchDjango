@@ -1,35 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    .header{
+        width: 100%;
+        height: 80px;
+        display: block;
+        background-color: rgb(255,245,238);
+    }
+    .inner_header{
+        width: 1000px;
+        height: 100%;
+        display: block;
+        margin: 0 auto ;
+        background-color: rgb(255,245,238);
+    }
+    .logo_container{
+        height: 100%;
+        display: table;
+        float: left;
+    }
+    .logo_container h1{
+        color: Black;
+        height: 100%;
+        display: table-cell;
+        vertical-align: middle;
+        font-family: "Nunito";
+        font-size: 32px;
+        font-weight: 200;
+    }
+    .logo_container h1 span{
+        font-weight: 800;
+    }
+    .navigation{
+        float:right;
+        height: 100%;
+        margin-top: -5%;
+    }
+    .navigation a{
+        height: 100%;
+        display: table;
+        float:left;
+        padding: 0px 20px;
+    }
+    .navigation a li{
+        display: table-cell;
+        vertical-align: middle;
+        height: 100%;
+        color: Black;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    .login_img{
+         height: 30px;
+    }
+    .register_img{
+        height: 30px;
+    }
+    .home_page{
+        height: 30px;
+    }
+    .recipes{
+        margin-top: 10%;
+        margin-left: 31%;
+    }
+    .new_recipe_img{
+        width: 300px;
+        height: 300px;
+    }
+    .recipe_img{
+        width: 300px;
+        height: 300px;
+    }
+    .search_function{
+        height: 100%;
+        float: right;
+    }
+    .search{
+        padding: 10.5px;
+        font-family: "Nunito";
+        font-size: 16px;
+        margin-top: 16.5px;
+        border: 2px solid rgb(239,184,147);
+        border-right: 0;
+        border-radius: 24px 0 0 24px;
+        width: 400px;
+    }
+    .search_btn{
+        float: right;
+        padding: 7.2px 10px;
+        margin-top: 16.5px;
+        margin-right: 16px;
+        background-color: rgb(255,245,238);
+        border-radius: 0 24px 24px 0;
+        font-size: 16px;
+        border: 2px solid rgb(239,184,147);
+        border-left-width: 0;
+        cursor: pointer;
+    }
+</style>
+
 <head>
-    <style>
-      @font-face { font-family: "OP"; src: url("../static/OP.ttf")}
-         </style>
-<title>One Kitchen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:wght@200;279&display=swap" rel="stylesheet">
+    <title>One Kitchen</title>
 </head>
 
-<body style="background-color: Azure;">
+<body>
 
-
-{%  if user.is_authenticated %} <!--- wenn user eingeloggt --->
-    <div style="text-align: center">
-     <p><button type="button"><a href="{% url 'logout_url' %}">Logout</a></button></p>
-    <p><button type="button"><a href="{% url 'admin:index' %}">Admin Panel</a></button></p>
+    <div class="header">
+     <div class ="inner_header">
+         <div class="logo_container">
+             <h1>One<span>KITCHEN</span></h1>
+         </div>
+         <div class="search_function">
+             <input type="text" placeholder="Suche nach Rezepten..." class="search">
+             <button type="submit" class="search_btn"> <img src="/media/search.png" class="icon_search"> </button>
+             <!--<a onclick="suchen()"><img src="/media/search.png" class="icon_search"></a>-->
+         </div>
+     </div>
+        <ul class="navigation">
+            {%  if user.is_authenticated %}
+                <a href="{% url 'logout_url' %}"><li><img  class="home_page" src="/media/logout.png"></li></a>
+                <button id="btns" type="button"><a href="{% url 'admin:index' %}">Admin Panel</a></button>
+            {% else %}
+                 <!--<a href="{% url 'login_url' %}"><li>Login</li></a>-->
+                 <a href="{% url 'login_url' %}"><li><img class="login_img" src="/media/login.png"></li></a>
+                 <a href="{% url 'register_url' %}"><li><img class="register_img" src="/media/register.png"></li></a>
+            {% endif %}
+        </ul>
     </div>
-{% else %}
-    <div style="text-align: center">
-    <p><button type="button"><a href="{% url 'login_url' %}">Login</a></button></p>
-    <p><button type="button"><a href="{% url 'register_url' %}">Registrieren</a></button></p>
-    </div>
-{% endif %}
 
-<h1 style="text-align: center;font-family: OP; font-size:120px; transform: rotate(10deg); ">One Kitchen</h1>
+    <!------das hier muss noch verbesserrt werden!!-->
     {%  if user.is_authenticated %}
-    <p style="font-size:50px; text-align: center; margin-top: 30px"> Hallo, {{ user.username }}.</p>
+    <p> Hallo, {{ user.username }}.</p>
     {% endif %}
-    <div style="text-align: center"><a href="{% url 'upload' %}"><img src="/media/dinner-recipes.png"width="300"  <!--- 2 klickbare bilder --->
-     height="300"></a>
-    <a href="{% url 'rezepte' %}"><img src="/media/rezepte.png"width="300"
-     height="300"></a></div>
+    <!--- 2 klickbare bilder --->
+    <div class="recipes">
+        <a href="{% url 'upload' %}"><img class="new_recipe_img" src="/media/dinner-recipes.png"></a>
+        <a href="{% url 'rezepte' %}"><img class="recipe_img" src="/media/rezepte.png"></a>
+    </div>
+
 
 </body>
 

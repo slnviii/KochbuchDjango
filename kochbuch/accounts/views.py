@@ -23,7 +23,7 @@ class ProfileForm(forms.ModelForm):
 
 
 def register(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = UserCreationForm(request.POST)
         profile_form = ProfileForm(request.POST)
         if form.is_valid() and profile_form.is_valid():

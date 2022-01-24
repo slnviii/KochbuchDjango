@@ -1,22 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<style>
+    .header{
+        width: 100%;
+        height: 80px;
+        display: block;
+        background-color: rgb(255,245,238);
+    }
+    .inner_header{
+        width: 1000px;
+        height: 100%;
+        display: block;
+        margin: 0 auto ;
+    }
+    .logo_container{
+        height: 100%;
+        display: table;
+        float: left;
+    }
+    .logo_container h1{
+        color: Black;
+        height: 100%;
+        display: table-cell;
+        vertical-align: middle;
+        font-family: "Nunito";
+        font-size: 32px;
+        font-weight: 200;
+    }
+    .logo_container h1 span{
+        font-weight: 800;
+    }
+    .navigation{
+        float:right;
+        height: 100%;
+    }
+    .navigation a{
+        height: 100%;
+        display: table;
+        float:left;
+        padding: 0px 20px;
+        vertical-align: middle;
+        margin-top: -5px;
+    }
+    .navigation a li{
+        display: table-cell;
+        vertical-align: middle;
+        height: 100%;
+        color: Black;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    .home_page{
+        height: 30px;
+    }
+    .login_container{
+        margin-top: 10%;
+        margin-left: 35%;
+        font-family: "Nunito";
+    }
+    .login_container label{
+        font-weight: 800;
+        font-size: 18px;
+    }
+    .login_container input{
+        padding: 5px;
+        font-family: "Nunito";
+        font-size: 16px;
+        margin-top: 16.5px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+        width: 300px;
+    }
+    .login_btn{
+        width: 70px;
+        height: 40px;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+        margin-left: 20%;
+    }
 
+</style>
+
+<head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:wght@200;279&display=swap" rel="stylesheet">
     <title>Login</title>
 </head>
-<body>
-    <h1 style="display:inline;color: black;border: 2px solid powderblue;padding: 1px"> System Login</h1>
-    <p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
-    <form
 
-          method="POST">
+<body>
+
+<div class="header">
+    <div class ="inner_header">
+        <div class="logo_container">
+            <h1>System<span>LOGIN</span></h1>
+        </div>
+        <ul class="navigation">
+            <a href="{% url 'overview' %}"><li><img class="home_page" src="/media/home.png"></li></a>
+        </ul>
+    </div>
+</div>
+
+<div class="login_container">
+    <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit"
-                style="width: 50px; height: 30px;margin-left: 85px "
-                            >Login</button>
+        <button type="submit" class="login_btn">Login</button>
 
     </form>
+
+</div>
+
 </body>
+
 </html>

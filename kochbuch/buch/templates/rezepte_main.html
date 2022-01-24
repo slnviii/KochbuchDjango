@@ -1,25 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    .header{
+        width: 100%;
+        height: 80px;
+        display: block;
+        background-color: rgb(255,245,238);;
+     }
+    .inner_header{
+        width: 1000px;
+        height: 100%;
+        display: block;
+        margin: 0 auto ;
+     }
+    .logo_container{
+        height: 100%;
+        display: table;
+        float: left;
+     }
+    .logo_container h1{
+        color: Black;
+        height: 100%;
+        display: table-cell;
+        vertical-align: middle;
+        font-family: "Nunito";
+        font-size: 32px;
+        font-weight: 200;
+     }
+    .logo_container h1 span{
+        font-weight: 800;
+     }
+    .navigation{
+        float:right;
+        height: 100%;
+     }
+    .navigation a{
+        height: 100%;
+        display: table;
+        float:left;
+        padding: 0px 20px;
+        margin-top: -5px;
+     }
+    .navigation a li{
+        display: table-cell;
+        vertical-align: middle;
+        height: 100%;
+        color: Black;
+        font-family: "Nunito";
+        font-size: 16px;
+     }
+    .home_page{
+        height: 30px;
+    }
+    #category_container{
+        margin-left: 5%;
+        margin-top: 5%;
+        font-family: "Nunito";
+        font-size: large;
+    }
+</style>
+
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:wght@200;279&display=swap" rel="stylesheet">
     <title>Rezepte</title>
-    <style>
-        @font-face { font-family: "OP"; src: url("../static/OP.ttf")}
-        body{
-            background-color: antiquewhite;
-        }
-    </style>
 </head>
+
 <body>
 
-<p><button type="button"><a href="{% url 'overview' %}">Startseite</a></button></p>
-<h1 style="font-size:100px; font-family: OP; text-align: center">Alle Rezepte</h1>
+<div class="header">
+    <div class ="inner_header">
+        <div class="logo_container">
+            <h1>Alle <span>Rezepte</span></h1>
+        </div>
+        <ul class="navigation">
+            <a href="{% url 'overview' %}"><li><img class="home_page" src="/media/home.png"></li></a>
+        </ul>
+    </div>
+</div>
 
-<h1 style="font-size: 40px">Nach Kategorie</h1>
 
-{% for category in categories %}     <!--- alle vorhandenen kategorieren werden durchlaufen und angezeigt + klickbar --->
-    <li style="font-size: 30px;margin-left: 40px "><a href="{%  url 'category' %}?name={{ category.name }}">{{ category.name }}</a></li>
-{% endfor %}
+<div id="category_container">
+    <h2>Nach Kategorie</h2>
+    {% for category in categories %}
+        <!--- alle vorhandenen kategorieren werden durchlaufen und angezeigt + klickbar --->
+        <li><a href="{%  url 'category' %}?name={{ category.name }}">{{ category.name }}</a></li>
+    {% endfor %}
+
+</div>
 
 </body>
 </html>
