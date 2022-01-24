@@ -16,7 +16,16 @@
 <p style="margin-bottom: 60px"> <img src= "{{ recipe.image.url}}"></p>
 <p style="margin-bottom: 60px"> {{ recipe.ingr }}</p>
 <p> {{ recipe.instr }}</p>      <!--- einziger weg um die felder abzurufen? .label dranhängen für feldbeschreibung?--->
-<p><button type="button"><a href = '#' >Zu Favoriten hinzufügen</a> </button></p>
+<form action="{% url 'add_favorite' recipe.pk %}" method="POST">
+        {% csrf_token %}
+        <p>
+          <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}", class="button buttonlightblue">Zu Favoriten hinzufügen</button></a>
+        - {{ total_favorites }} Favorit</p>
+    </form>
+    <p>
+
+    </p>
+
 
 <ul>
 <hr style="width:40%;height:4px;color:black;background-color:black">
@@ -24,7 +33,12 @@
 Kommentare
 </p>
 <hr style="width:40%;height:4px;color:black;background-color:black">
-{% for comment in comments %}
+{% if user.is_authenticated %}
+<div style="margin-bottom:10px">
+<a href="{% url 'add_comment' recipe.pk %}"><button style="font-size:18px;padding: 20px 38px;"class="buttonlightgreen button">Kommentar hinzufügen</button></a>
+</div>
+{% endif %}
+    {% for comment in recipe.comments.all %}
     {% if comment.recipe == recipe %}    <!-- das recipe in comment ist kein string/name sondern das model von recipe -->
         <ul style="border:3px; border-style:solid; border-color:black; padding: 1em;">
            <strong>{{ comment.author }}</strong>  ||| {{ comment.created }}
@@ -38,24 +52,4 @@ Kommentare
 
 </ul>
 
-{%  if user.is_authenticated %}
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-
-    {% for field in form %}
-    {% if field.name == 'author' %}
-        {{ field.as_hidden }}
-     {% else %}
-        <p style="font-size: 15px;font-weight: bold">
-               Dein Kommentar:
-        </p>
-                {{ field }}
-     {% endif %}
-    {% endfor %}
-    <p><button type="submit">Kommentar hochladen</button></p>
-    {% endif %}
-
-</form>
-
 {% endblock %}
-</html>

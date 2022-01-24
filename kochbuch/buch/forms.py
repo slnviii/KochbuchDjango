@@ -1,7 +1,7 @@
 from django import forms
 
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Comment
 
 
 class UpdateProfileForm(forms.ModelForm):
@@ -11,3 +11,13 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['avatar', 'bio']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('author','body')
+
+        widgets = {
+            'author': forms.TextInput(attrs={'class': 'form-control'}),
+            'body' : forms.Textarea(attrs={'class': 'form-control'}),
+        }

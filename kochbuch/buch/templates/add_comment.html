@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Kommentar abgeben</h1>
+
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+        <p>
+        {{ form.body }}
+        </p>
+        {% else %}
+        <p>
+        {{ form.as_p }}
+        </p>
+        {% endif %}
+    <button class="button">Kommentar hinzufügen</button>
+
+    </form>
+
+
+
+</div>
+{% endblock %}

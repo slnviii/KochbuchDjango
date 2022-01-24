@@ -44,7 +44,14 @@ class Recipe(models.Model):
     comment = models.ManyToManyField('Comment', related_query_name='comment', blank=True)
     dauer = models.IntegerField('Dauer',default="30")
     schwierigkeit = models.CharField(max_length=15, choices=(('superleicht','Sehr leicht'),('leicht','Leicht'),('mittel','Mittel'),('schwer','Schwer')),default='leicht')
+    favorite = models.ManyToManyField(User, related_name='rezepte',null=True)
     #bewertet = models.ManyToManyField('Rating', null=True)
+
+
+    def total_favorites(self):
+        return self.favorite.count()
+
+
     def __str__(self):
         return self.title   # bild titel statt "objekt"
 
@@ -66,7 +73,7 @@ class Profile(models.Model):
 
 class Comment(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='comments')
-    author = models.CharField('Author', max_length=10, null=True, blank=True)
+    author = models.CharField('Author', max_length=100, null=True, blank=True)
     body = models.TextField('Kommentar:')
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
