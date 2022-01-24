@@ -37,14 +37,14 @@ class Recipe(models.Model):
     ingr = models.TextField('Zutaten', max_length=500)
     instr = models.TextField('Zubereitung', max_length=10000)
     kategorien = models.ManyToManyField(Category)  # Rezept kann mehrere Kategorien haben und umgekehrt
-    thema = models.ForeignKey(Theme, null=True, on_delete=models.CASCADE)
-    tags = models.ManyToManyField(Tag, null=True)
+    thema = models.ForeignKey(Theme, null=True, blank=True,on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag, null=True,blank=True)
     #zutaten = models.ManyToManyField(Zutat)  # Rezept hat mehrere Zutaten
-    author = models.ForeignKey(User, to_field="username", db_column="username", on_delete=models.CASCADE)
-    comment = models.ManyToManyField('Comment', related_query_name='comment', blank=True)
+    author = models.ForeignKey(User, to_field="username", db_column="username", on_delete=models.CASCADE,blank=True, null=True)
+    comment = models.ManyToManyField('Comment', related_query_name='comment', null = True, blank=True)
     dauer = models.IntegerField('Dauer',default="30")
     schwierigkeit = models.CharField(max_length=15, choices=(('superleicht','Sehr leicht'),('leicht','Leicht'),('mittel','Mittel'),('schwer','Schwer')),default='leicht')
-    favorite = models.ManyToManyField(User, related_name='rezepte',null=True)
+    favorite = models.ManyToManyField(User, related_name='rezepte', null=True, blank=True)
     #bewertet = models.ManyToManyField('Rating', null=True)
 
 

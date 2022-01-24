@@ -38,8 +38,9 @@ def overview(request):
 def upload(request):
     if request.method == "POST":
         form = RecipeForm(request.POST, request.FILES)
+        form.instance.author = request.user
         if form.is_valid():  # Formular überprüfen
-            form.instance.author = request.user  # aktiver user wird automatisch als author des rezepts festgesetzt
+             # aktiver user wird automatisch als author des rezepts festgesetzt
             form.save()
             return HttpResponseRedirect('/')  # Umleitung
     else:
