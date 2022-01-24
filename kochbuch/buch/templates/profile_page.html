@@ -27,14 +27,7 @@
     <hr style="width: 550px; border-style: dotted none none; border-width: 3px; border-color: #949182;">
 
    <div style="margin-top:20px; font-size: 25px; font-family:Castellar;">Deine Favoriten</div>
-    <div style="border: solid black 1px;display:inline-block;background-color: #d9d2b0">
-    {% for favorite in user.profile.favorite.all %}
-      <div style="position: relative;text-align: center; display:table-cell; padding:1px;">
-          <a href="{% url 'recipe' favorite.pk %}"><img src="{{favorite.image.url}}"style="max-height:200px; max-width:200px;border: solid black 2px"></a>
-          <div style="position: absolute;top: 60%;left: 50%;transform: translate(-50%, -50%);"><a href="{%  url 'recipe' favorite.pk %}"style="font-family:impact;font-size: 25px;color:white; text-decoration: none;-webkit-text-stroke-width: 1px;-webkit-text-stroke-color: black;">{{ favorite }}</a></div>
-      </div>
-    {% endfor %}
-    </div>
+
     <div style="border: solid black 1px;display:inline-block;background-color: #d9d2b0">
     {% for recipe in recipes %}
         {% for favorite in recipe.favorite.all %}
