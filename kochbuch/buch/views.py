@@ -1,13 +1,13 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, get_object_or_404 # get_object_or_404 hinzugefügt
+from django.shortcuts import render, get_object_or_404, redirect  # get_object_or_404 hinzugefügt
 from django import forms
 from django.urls import reverse_lazy
 from django.views import generic
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.views import PasswordChangeView
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 
 from .forms import UpdateProfileForm, CommentForm
 from . import models
@@ -123,6 +123,10 @@ class RecipeView(DetailView):      # Rezept darstellen
         return context
 
 
+class DeleteComment(DeleteView):
+    model = Comment
+    template_name = 'delete_comment.html'
+    success_url = reverse_lazy('overview')
 
 # def recipe(request, recipe_name):
 #     #  rec_name = request.GET['name']      # hier wird der name des rezepts abgefragt auf den man geklickt hat

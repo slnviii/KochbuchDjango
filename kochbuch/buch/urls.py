@@ -16,4 +16,7 @@ urlpatterns = [
     path('change-password/', ChangePasswordView.as_view(), name='change_password'),
     path('favorite/<int:pk>', AddFavorite, name='add_favorite'),
     path('recipe/<int:pk>/comment', AddComment.as_view(), name='add_comment'),
+    path('recipe/<int:pk>/delete_comment', DeleteComment.as_view(), name='delete_comment'),
+
+    #path('search')
 ]
