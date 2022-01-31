@@ -88,7 +88,13 @@ class ChangePasswordView(PasswordChangeView):
 
 def AddFavorite(request, pk):
     recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
-    recipe.favorite.add(request.user)
+    added = False
+    if recipe.favorite.filter(id=request.user.id).exists():
+        recipe.favorite.remove(request.user)
+        added = False
+    else:
+        recipe.favorite.add(request.user)
+        added = True
     return HttpResponseRedirect(reverse('recipe', args=[str(pk)]))
 
 class AddComment(CreateView):
@@ -108,7 +114,12 @@ class RecipeView(DetailView):      # Rezept darstellen
         context = super(RecipeView, self).get_context_data(*args, **kwargs)
         current = get_object_or_404(Recipe, id=self.kwargs['pk'])
         total_favorites = current.total_favorites()  # recipe model function callen
+
+        added = False
+        if current.favorite.filter(id=self.request.user.id):
+            added = True
         context["total_favorites"] = total_favorites
+        context["added"] = added
         return context
 
 
@@ -156,6 +167,9 @@ def filter_form(request):
         categories=all_categories,
         users=all_users,
     ))
+
+#def search(request):
+
 
 
 def time(request):

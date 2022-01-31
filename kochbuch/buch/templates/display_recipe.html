@@ -19,8 +19,17 @@
 <form action="{% url 'add_favorite' recipe.pk %}" method="POST">
         {% csrf_token %}
         <p>
-          <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}", class="button buttonlightblue">Zu Favoriten hinzufügen</button></a>
-        - {{ total_favorites }} Favorit</p>
+        {% if user.is_authenticated %}
+          {% if added %}
+            <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}", class="button buttonred">Aus Favoriten entfernen</button></a>
+          {% else %}
+            <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}", class="button buttonlightblue">Zu Favoriten hinzufügen</button></a>
+          {% endif %}
+        {% else %}
+        <small>Login to like</small>
+        {% endif %}
+
+        - {{ total_favorites }} Favoriten</p>
     </form>
     <p>
 
