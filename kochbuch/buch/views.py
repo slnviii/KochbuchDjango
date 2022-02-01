@@ -128,6 +128,16 @@ class DeleteComment(DeleteView):
     template_name = 'delete_comment.html'
     success_url = reverse_lazy('overview')
 
+
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        recipes = Recipe.objects.filter(title__icontains=searched)
+        return render(request, 'search.html', dict(searched=searched, recipes=recipes))
+    else:
+        return render(request, 'search.html', {})
+
+
 # def recipe(request, recipe_name):
 #     #  rec_name = request.GET['name']      # hier wird der name des rezepts abgefragt auf den man geklickt hat
 #     recipe = models.Recipe.objects.get(title=recipe_name)  # das geklickte rezept wird gleichgesetzt und als objekt abgespeichert

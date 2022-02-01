@@ -102,7 +102,9 @@ li.dropdown {
     <li style="float:left;"><span style="font-size:15px; display:inline-block;color: white;text-align: center; padding: 5px 5px; text-decoration: none;" id="time"></span></li>
 
 
+
     <li style="display: inline-block;border-right: 1px solid #bbb;border-left: 1px solid #bbb;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'overview' %}">Home</a></li>
+    <li style="display: inline-block;border-right: 1px solid #bbb;border-left: 1px solid #bbb;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'search' %}">Suche</a></li>
     <li style="display: inline-block;border-right: 1px solid #bbb;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'rezepte' %}">Rezepte</a></li>
         {%  if user.is_authenticated %} <!--- wenn user eingeloggt --->
     <li style="display: inline-block;border-right: 1px solid #bbb;;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'upload' %}">Neues Rezept hochladen</a></li>
