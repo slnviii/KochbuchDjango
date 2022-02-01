@@ -7,8 +7,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.views import PasswordChangeView
-from django.views.generic import ListView, DetailView, CreateView, DeleteView
-
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from .forms import UpdateProfileForm, CommentForm
 from . import models
 from django.conf import settings
@@ -138,6 +137,14 @@ def search(request):
         return render(request, 'search.html', {})
 
 
+class EditRecipeView(UpdateView):
+    model = Recipe
+    template_name = 'edit_recipe.html'
+    fields = ['title','image', 'ingr', 'instr', 'kategorien','tags','thema', 'dauer', 'schwierigkeit']
+
+
+
+
 # def recipe(request, recipe_name):
 #     #  rec_name = request.GET['name']      # hier wird der name des rezepts abgefragt auf den man geklickt hat
 #     recipe = models.Recipe.objects.get(title=recipe_name)  # das geklickte rezept wird gleichgesetzt und als objekt abgespeichert
@@ -182,7 +189,7 @@ def filter_form(request):
         users=all_users,
     ))
 
-#def search(request):
+
 
 
 

@@ -11,7 +11,10 @@
     {% endblock %}
 {% block content %}
 
-<p style="font-size: 35px;font-family:Verdana">{{ recipe.title }}</p>
+<p style="font-size: 35px;font-family:Verdana">{{ recipe.title }}
+        {% if recipe.author == user %}
+        <small><a href="{% url 'edit_recipe' recipe.pk %}">bearbeiten</a></p></small>
+        {% endif %}
 <li style="alignment: center;font-size: 12px;margin-top: -30px; margin-bottom: 50px">von {{ recipe.author }}</li>
 <p style="margin-bottom: 60px"> <img src= "{{ recipe.image.url}}"></p>
 <p style="margin-bottom: 60px"> {{ recipe.ingr }}</p>
@@ -55,7 +58,9 @@ Kommentare
         <li style="list-style-type:none">
         {{ comment.body }}
         </li>
+
         <a href="{% url 'delete_comment' comment.pk %}"><button class="btn btn-warning">Löschen</button></a>
+
 
 
         </ul>
