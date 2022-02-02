@@ -1,3 +1,60 @@
+<style>
+    .search_function{
+        visibility: hidden;
+    }
+    .home_page{
+        visibility: visible;
+        height: 30px;
+    }
+    h1{
+        color: Black;
+        font-family: "Nunito";
+        font-size: 32px;
+        font-weight: 250;
+        margin-left: 5%;
+    }
+    h1 span{
+        font-weight: 800;
+    }
+    .login_container{
+        margin-top: 8%;
+        /*margin-left: 35%;*/
+        font-family: "Nunito";
+    }
+    .login_container label{
+        font-weight: 800;
+        font-size: 18px;
+    }
+    .login_container input{
+        padding: 5px;
+        font-family: "Nunito";
+        font-size: 16px;
+        margin-top: 16.5px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+        width: 300px;
+    }
+    .login_btn{
+        width: 70px;
+        height: 40px;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+        margin-left: 5%;
+    }
+    .help_btn{
+        text-decoration: none;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+        margin-left: 1%;
+    }
+</style>
+
 {% extends 'base.html' %}
 
     <title>{% block title %}Login - One Kitchen{% endblock %}</title>
@@ -5,19 +62,19 @@
 
 
 {% block content %}
-    <h1>Deine Zugangsdaten</h1>
-    <form
 
-          method="POST">
+    <div class="login_container">
+    <h1>Deine <span>Zugangsdaten</span></h1>
+
+    <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <div style="margin-bottom:10px">
-        <button class="button" type="submit">Login</button>
-        </div>
-        <div>
-        <button style="font-size:10px;padding: 10px 22px;"class="buttongray button" href="{% url 'register_url' %}">Du brauchst ein Konto?</button>
-        </div>
+        <button type="submit" class="login_btn">Login</button>
+        <a class="help_btn" href="{% url 'register_url' %}">Du brauchst ein Konto?  </a>
     </form>
+
+    </div>
+
 {% endblock %}
 
 {% block add_scripts %}

@@ -1,17 +1,57 @@
+<style>
+    .home_page{
+        visibility: hidden;
+    }
+    h1{
+        text-align: center;
+        font-size:120px;
+        /*transform: rotate(6deg);*/
+    }
+    .buttonlightgreen button{
+        font-size:18px;
+        padding: 20px 38px;
+    }
+    .buttonlightblue button{
+        font-size:18px;
+        padding: 20px 38px;
+    }
+    .navigation{
+        margin-bottom: 30px
+    }
+    .recipes{
+        margin-top: 10%;
+        /*margin-left: 20%;*/
+    }
+    .new_recipe_img{
+        width: 300px;
+        height: 300px;
+    }
+    .recipe_img{
+        width: 300px;
+        height: 300px;
+    }
+
+</style>
+
+
 {% extends 'base.html' %}
 {% block title %}Home - One Kitchen{% endblock %}
+
 {% block content %}
 
-<h1 style="text-align: center;font-family: OP; font-size:120px; transform: rotate(6deg); ">One Kitchen</h1>
+<!--<h1>One Kitchen</h1>-->
     {% if not user.is_authenticated %}
-    <div style="margin-bottom: 30px">
-        <a href="{% url 'login_url' %}"><button style="font-size:18px;padding: 20px 38px;"class="buttonlightgreen button">Login</button></a>
-        <a href="{% url 'register_url' %}"><button style="font-size:18px;padding: 20px 38px;"class="buttonlightblue button" >Registrieren</button></a>
+    <div>
+        <!--<a href="{% url 'login_url' %}"><button class="buttonlightgreen button">Login</button></a>
+        <a href="{% url 'register_url' %}"><button class="buttonlightblue button" >Registrieren</button></a>-->
 
     </div>
     {% endif %}
-    <div style="text-align: center"><a href="{% url 'upload' %}"><img src="/media/dinner-recipes.png"width="300" height="300"></a>
-    <a href="{% url 'rezepte' %}"><img src="/media/rezepte.png"width="300" height="300"></a></div>
+
+    <div class="recipes">
+        <a href="{% url 'upload' %}"><img class="new_recipe_img" src="/media/dinner-recipes.png"></a>
+        <a href="{% url 'rezepte' %}"><img class="recipe_img" src="/media/rezepte.png"></a>
+    </div>
 
 {% endblock %}
 {% block add_scripts %}

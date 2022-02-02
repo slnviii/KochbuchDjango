@@ -1,43 +1,84 @@
+<style>
+    .search_function{
+        visibility: hidden;
+    }
+    h1{
+        font-family: "Nunito";
+        margin-left: 10%;
+    }
+    .profile_container{
+        font-family: "Nunito";
+        font-size: 18px;
+    }
+    .profile_pic{
+        margin-top: 10px;
+        max-height:150px;
+        max-width:150px;
+    }
+    .edit_profile{
+        width: 150px;
+        height: 35px;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    .favorites_container{
+        font-family: "Nunito";
+        font-size: 18px;
+    }
+    .favorites_container p{
+        border: 0.5px solid rgb(239,184,147);
+        background-color: rgb(255,245,238);
+    }
+    .favorites_container img{
+        max-height: 400px;
+        max-width: 400px;
+    }
+    .favorites_container a:link{
+        text-decoration: none;
+    }
+</style>
+
 {% extends 'base.html' %}
 {% block title %}
     Profil - One Kitchen
 {% endblock %}
 {% block content %}
 
-    <div style="margin-top: 30px; font-size:50px">Hallo, {{ user.username }}!</div>
+    <h1>Hallo, {{ user.username }}!</h1>
+
     {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
 
-                {% for message in messages %}
-                  {{ message }}
-                {% endfor %}
+    {% endif %}
 
-        {% endif %}
-    <div style="margin-left:20%;margin-top:10px">
-
-     <a href="{% url 'edit_profile' %}"><button class="button buttongray">Profil bearbeiten</button></a>
-
+    <div class="profile_container">
+        <span><img class="profile_pic" src= "{{ user.profile.avatar.url }}" /></span>
+        <p>Deine Beschreibung</p>
+        <p>{{ user.profile.bio }}</p>
+        <a href="{% url 'edit_profile' %}"><button class="edit_profile">Profil bearbeiten</button></a>
     </div>
 
-        <span><img src= "{{ user.profile.avatar.url }}"style="margin-top: 10px;max-height:150px; max-width:150px" /></span>
+    </br>
 
-    <div style="margin-top:20px; font-size: 25px; font-family:Castellar;">Deine Beschreibung</div>
-    <div style="border: solid black 1px;display:inline-block; height: 100px; width:500px;background-color: #d9d2b0">
-    <div style="font-family: 'Segoe Print';margin-top:5px;">{{ user.profile.bio }}</div>
-    </div>
-    <hr style="width: 550px; border-style: dotted none none; border-width: 3px; border-color: #949182;">
-
-   <div style="margin-top:20px; font-size: 25px; font-family:Castellar;">Deine Favoriten</div>
-
-    <div style="border: solid black 1px;display:inline-block;background-color: #d9d2b0">
+    <div class="favorites_container">
+    <p>Deine Favoriten</p>
     {% for recipe in recipes %}
         {% for favorite in recipe.favorite.all %}
-        {% if user.id == favorite.id %}
-            <div style="position: relative;text-align: center; display:table-cell; padding:1px;">
-          <a href="{% url 'recipe' recipe.pk %}"><img src="{{recipe.image.url}}"style="max-height:200px; max-width:200px;border: solid black 2px"></a>
-          <div style="position: absolute;top: 60%;left: 50%;transform: translate(-50%, -50%);"><a href="{%  url 'recipe' recipe.pk %}"style="font-family:impact;font-size: 25px;color:white; text-decoration: none;-webkit-text-stroke-width: 1px;-webkit-text-stroke-color: black;">{{ recipe }}</a></div>
-      </div>
-        {% endif %}
+
+            {% if user.id == favorite.id %}
+                <div>
+                    <a href="{% url 'recipe' recipe.pk %}"><img src="{{recipe.image.url}}"></a>
+                    <div><a href="{%  url 'recipe' recipe.pk %}">{{ recipe }}</a></div>
+                </div>
+            {% endif %}
+
         {% endfor %}
+        </br>
     {% endfor %}
     </div>
 

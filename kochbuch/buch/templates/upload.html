@@ -1,66 +1,122 @@
+<style>
+    .search_function{
+        visibility: hidden;
+    }
+    h1{
+        margin-top:40px;
+        text-align: center;
+        color: Black;
+        font-family: "Nunito";
+        font-size: 32px;
+    }
+    p{
+        font-size: 20px;
+        font-weight: bold;
+        margin-top:20px
+    }
+    .download_container{
+        height: 100%;
+        max-width: 60%;
+        margin-top: 4%;
+        margin-left: 22%;
+        vertical-align: middle;
+        font-family: "Nunito";
+        font-size: 18px;
+    }
+    .download_container label{
+        font-weight: 800;
+    }
+    .download_container input{
+        padding: 5px;
+        font-family: "Nunito";
+        font-size: 16px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+        width: 300px;
+    }
+    #id_image{
+        border: 0px;
+    }
+    .download_container textarea{
+        padding: 5px;
+        height: 150px;
+        width: 400px;
+        font-family: "Nunito";
+        font-size: 16px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+    }
+    .download_container select{
+        padding: 5px;
+        height: 100px;
+        width: 400px;
+        font-family: "Nunito";
+        font-size: 16px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+    }
+    .download_container select option{
+        padding: 5px;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    #id_schwierigkeit, #id_thema{
+        height: 40px;
+        padding: 1px;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    .download_container select option hover{
+       background-color: rgb(255,245,238);
+    }
+    .recipe_fields_label, .author{
+        font-weight: 800;
+    }
+    .download_btn{
+        width: 100px;
+        height: 35px;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    .download_container select::-webkit-scrollbar-corner{
+        border-radius: 2px;
+    }
+
+
+</style>
+
+</style>
 {% extends 'base.html' %}
     {% block title %}Neues Rezept - One Kitchen{% endblock %}
 {% block style %}
 {% endblock %}
 {% block content %}
-    <h1 style="margin-top:40px">Neues Rezept hochladen</h1>
+    <h1><span>Neues Rezept</span> hochladen</h1>
 
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p style="font-size: 20px;font-weight: bold;margin-top:20px">
-       Ersteller: {{ user.username }}
+    <div class="download_container">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p class="author">
+            Ersteller: {{ user.username }}
+        </p>
 
-    </p>
- <div style="">
-     <div style="background-color: #E5D9C9;width: 430px;display: inline-block;border: 1px solid black;margin-right:-5px">
-        <p>
-            <ul>Rezepttitel</ul>
-            <ul>{{ form.title }}</ul>
-        </p>
-        <p style="border: 1px solid black;">
-            <ul style="">Zutaten</ul>
-            <ul>{{ form.ingr }}</ul>
-        </p>
-        <p style="border: 1px solid black;">
-            <ul>Zubereitung</ul>
-            <ul>{{ form.instr }}</ul>
-        </p>
-        <p style="border: 1px solid black;">
-            <ul>Dauer in Minuten</ul>
-            <ul>{{ form.dauer }}</ul>
-        </p>
-     </div>
-     <div style="background-color: #E5D9C9;width: 430px;display: inline-block;border: 1px solid black;">
-        <p  style="margin-top:35px">
-            <ul style="">Eine oder mehrere Kategorien wählen(ctrl click)</ul>
-            <ul>{{ form.kategorien }}</ul>
-        </p>
-        <p style="border: 1px solid black">
-            <ul>Ein Thema wählen</ul>
-            <ul>{{ form.thema }}</ul>
-        </p>
-        <p style="border: 1px solid black">
-            <ul>Ein oder mehrere Tags wählen(ctrl click)</ul>
-            <ul>{{ form.tags }}</ul>
-        </p>
-        <p style="">
-            <ul>Dein Tag ist nicht dabei?</ul>
-            <ul>Füge es hier hinzu</ul>
-        </p>
-        <p style="border: 1px solid black">
-            <ul>Schwierigkeit wählen(ctrl click)</ul>
-            <ul>{{ form.schwierigkeit }}</ul>
-        </p>
-        <p style="border: 1px solid black;">
-            <ul>Bitte lade ein Bild hoch</ul>
-            <ul>{{ form.image }}</ul>
-        </p>
-    </div>
+        {% for field in form %}
+            {% if field.name == 'author' %}
+                {{ field.as_hidden }}
+            {% else %}
+                <p class="recipe_fields_label"> {{ field.label }}:
+                <p class="recipe_fields"> {{ field }} </p>
+                </p>
+            {% endif %}
+        {% endfor %}
+        <p><button type="submit" class="download_btn">Hochladen</button></p>
 
- </div>
- <div style="margin-top: 10px"><button class="button" type="submit">Hochladen</button></div>
+    </form>
 
-</form>
+</div>
 
 {% endblock %}
 </html>
