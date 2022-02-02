@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -62,6 +63,31 @@
     .recipes{
         margin-top: 10%;
         margin-left: 31%;
+=======
+<style>
+    .home_page{
+        visibility: hidden;
+    }
+    h1{
+        text-align: center;
+        font-size:120px;
+        /*transform: rotate(6deg);*/
+    }
+    .buttonlightgreen button{
+        font-size:18px;
+        padding: 20px 38px;
+    }
+    .buttonlightblue button{
+        font-size:18px;
+        padding: 20px 38px;
+    }
+    .navigation{
+        margin-bottom: 30px
+    }
+    .recipes{
+        margin-top: 10%;
+        /*margin-left: 20%;*/
+>>>>>>> Stashed changes
     }
     .new_recipe_img{
         width: 300px;
@@ -71,6 +97,7 @@
         width: 300px;
         height: 300px;
     }
+<<<<<<< Updated upstream
     .search_function{
         height: 100%;
         float: right;
@@ -103,6 +130,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:wght@200;279&display=swap" rel="stylesheet">
     <title>One Kitchen</title>
 </head>
+=======
+
+</style>
+
+
+{% extends 'base.html' %}
+{% block title %}Home - One Kitchen{% endblock %}
+
+{% block content %}
+
+<!--<h1>One Kitchen</h1>-->
+    {% if not user.is_authenticated %}
+    <div>
+        <!--<a href="{% url 'login_url' %}"><button class="buttonlightgreen button">Login</button></a>
+        <a href="{% url 'register_url' %}"><button class="buttonlightblue button" >Registrieren</button></a>-->
+>>>>>>> Stashed changes
 
 <body>
 
@@ -133,12 +176,19 @@
     {%  if user.is_authenticated %}
     <p> Hallo, {{ user.username }}.</p>
     {% endif %}
+<<<<<<< Updated upstream
     <!--- 2 klickbare bilder --->
+=======
+
+>>>>>>> Stashed changes
     <div class="recipes">
         <a href="{% url 'upload' %}"><img class="new_recipe_img" src="/media/dinner-recipes.png"></a>
         <a href="{% url 'rezepte' %}"><img class="recipe_img" src="/media/rezepte.png"></a>
     </div>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
 </body>
 

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -51,6 +52,23 @@
     }
     .home_page{
         height: 30px;
+=======
+<style>
+    .search_function{
+        visibility: hidden;
+    }
+    h1{
+        margin-top:40px;
+        text-align: center;
+        color: Black;
+        font-family: "Nunito";
+        font-size: 32px;
+    }
+    p{
+        font-size: 20px;
+        font-weight: bold;
+        margin-top:20px
+>>>>>>> Stashed changes
     }
     .download_container{
         height: 100%;
@@ -98,6 +116,15 @@
         font-family: "Nunito";
         font-size: 16px;
     }
+<<<<<<< Updated upstream
+=======
+    #id_schwierigkeit, #id_thema{
+        height: 40px;
+        padding: 1px;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+>>>>>>> Stashed changes
     .download_container select option hover{
        background-color: rgb(255,245,238);
     }
@@ -113,6 +140,7 @@
         font-family: "Nunito";
         font-size: 16px;
     }
+<<<<<<< Updated upstream
 
 
 </style>
@@ -158,9 +186,49 @@
         {% endfor %}
         <p><button type="submit" class="download_btn">Hochladen</button></p>
 
+=======
+    .download_container select::-webkit-scrollbar-corner{
+        border-radius: 2px;
+    }
+
+
+</style>
+
+</style>
+{% extends 'base.html' %}
+    {% block title %}Neues Rezept - One Kitchen{% endblock %}
+{% block style %}
+{% endblock %}
+{% block content %}
+    <h1><span>Neues Rezept</span> hochladen</h1>
+
+    <div class="download_container">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p class="author">
+            Ersteller: {{ user.username }}
+        </p>
+
+        {% for field in form %}
+            {% if field.name == 'author' %}
+                {{ field.as_hidden }}
+            {% else %}
+                <p class="recipe_fields_label"> {{ field.label }}:
+                <p class="recipe_fields"> {{ field }} </p>
+                </p>
+            {% endif %}
+        {% endfor %}
+        <p><button type="submit" class="download_btn">Hochladen</button></p>
+
+>>>>>>> Stashed changes
     </form>
 
 </div>
 
+<<<<<<< Updated upstream
 </body>
 </html>
+=======
+{% endblock %}
+</html>
+>>>>>>> Stashed changes

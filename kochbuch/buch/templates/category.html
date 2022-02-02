@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -85,9 +86,49 @@
         </ul>
     </div>
 </div>
+=======
+<style>
+ .search_function{
+        visibility: hidden;
+    }
+ .recipes_container{
+     margin-top:5%;
+     font-size: 20px;
+     font-family: "Nunito";
+ }
+ .recipes_container span{
+     font-weight: 800;
+ }
+ h1{
+     font-family: "Nunito";
+     font-size: 45px;
+     font-weight: 500;
+     margin-left: 10%;
+ }
+ .recipe_img{
+     height: 250px;
+     width: 250px;
+ }
+</style>
+{% extends 'base.html' %}
+    {% block title %}{{ category.name }} - One Kitchen{% endblock %}
+    <!--{% block style %}{% endblock %}-->
+
+{% block content %}
+<h1>Rezepte für <span>{{ category.name }}</span></h1>
+
+<!--<table class="center" >
+     tabelle für alle rezepte dieser kategorie
+    <tr>
+        <th></th>
+        <th>Rezept</th>
+        <th>Author</th>
+    </tr>
+>>>>>>> Stashed changes
 
 <div  class="recipes_container">
     {% for recipe in category.recipe_set.all %}
+<<<<<<< Updated upstream
         <p>
          <a href="{%  url 'recipe' %}?name={{ recipe.title }}"><img src= "{{ recipe.image.url}}" class="recipe_img"/><br/></a>
          <span>{{ recipe.title }}</span><br/>
@@ -99,4 +140,27 @@
 
 </body>
 
+=======
+    <tr>
+         table rows loop, für jedes rezept in der kategorie wird 1 reihe erstellt
+       <td> <img src="{{ recipe.image.url}}"/> </td>
+       <td><a href="{%  url 'recipe' recipe.pk %}">{{ recipe.title }}</a></td> rezept ist klickbar
+       <td>{{ recipe.author }}</td>
+    </tr>
+    {% endfor %}
+
+</table>--->
+
+<div  class="recipes_container">
+    {% for recipe in category.recipe_set.all %}
+        <p>
+         <a href="{%   url 'recipe' recipe.pk %}"><img src= "{{ recipe.image.url}}" class="recipe_img"/><br/></a>
+         <span>{{ recipe.title }}</span><br/>
+         von {{ recipe.author }}
+        </p>
+    {% endfor %}
+
+</div>
+{% endblock %}
+>>>>>>> Stashed changes
 </html>

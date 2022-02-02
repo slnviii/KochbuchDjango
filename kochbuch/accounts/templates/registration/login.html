@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -56,6 +57,29 @@
     .login_container{
         margin-top: 10%;
         margin-left: 35%;
+=======
+<style>
+    .search_function{
+        visibility: hidden;
+    }
+    .home_page{
+        visibility: visible;
+        height: 30px;
+    }
+    h1{
+        color: Black;
+        font-family: "Nunito";
+        font-size: 32px;
+        font-weight: 250;
+        margin-left: 5%;
+    }
+    h1 span{
+        font-weight: 800;
+    }
+    .login_container{
+        margin-top: 8%;
+        /*margin-left: 35%;*/
+>>>>>>> Stashed changes
         font-family: "Nunito";
     }
     .login_container label{
@@ -79,8 +103,25 @@
         border-radius: 10%;
         font-family: "Nunito";
         font-size: 16px;
+<<<<<<< Updated upstream
         margin-left: 20%;
     }
+=======
+        margin-left: 5%;
+    }
+    .help_btn{
+        text-decoration: none;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+        margin-left: 1%;
+    }
+</style>
+
+{% extends 'base.html' %}
+>>>>>>> Stashed changes
 
 </style>
 
@@ -92,6 +133,7 @@
 
 <body>
 
+<<<<<<< Updated upstream
 <div class="header">
     <div class ="inner_header">
         <div class="logo_container">
@@ -104,12 +146,28 @@
 </div>
 
 <div class="login_container">
+=======
+{% block content %}
+
+    <div class="login_container">
+    <h1>Deine <span>Zugangsdaten</span></h1>
+
+>>>>>>> Stashed changes
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="login_btn">Login</button>
+<<<<<<< Updated upstream
 
     </form>
+=======
+        <a class="help_btn" href="{% url 'register_url' %}">Du brauchst ein Konto?  </a>
+    </form>
+
+    </div>
+
+{% endblock %}
+>>>>>>> Stashed changes
 
 </div>
 

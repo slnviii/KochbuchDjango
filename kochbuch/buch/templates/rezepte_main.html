@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -59,6 +60,39 @@
         font-size: large;
     }
 </style>
+=======
+<style>
+    .search_function{
+        visibility: hidden;
+    }
+    h1{
+        font-family: "Nunito";
+        font-size: 45px;
+    }
+    .all_recipes{
+        margin-left: 10%;
+    }
+    li{
+        font-family: "Nunito";
+        font-size: 32px;
+    }
+    .category_container a:link{
+        text-decoration: none;
+    }
+    .category_container li{
+        list-style: none;
+        border: 0.5px solid rgb(239,184,147);
+        background-color: rgb(255,245,238);
+    }
+    .category_container li:hover{
+        background-color: rgb(252,224,206);
+    }
+
+</style>
+
+{% extends 'base.html' %}
+    {% block title %}Rezepte - One Kitchen{% endblock %}
+>>>>>>> Stashed changes
 
 <head>
     <meta charset="UTF-8">
@@ -79,8 +113,10 @@
     </div>
 </div>
 
+<<<<<<< Updated upstream
 
 <div id="category_container">
+
     <h2>Nach Kategorie</h2>
     {% for category in categories %}
         <!--- alle vorhandenen kategorieren werden durchlaufen und angezeigt + klickbar --->
@@ -88,6 +124,26 @@
     {% endfor %}
 
 </div>
+=======
+{% block content %}
+
+<div class="all_recipes"><h1>Alle Rezepte</h1></div>
+<div class="container">
+  <h1>Nach Kategorie</h1>
+  {% for category in categories %}
+      <!--- alle vorhandenen kategorieren werden durchlaufen und angezeigt + klickbar --->
+      <div class="category_container">
+          <a href="{%  url 'category' category.name %}"><li>{{ category.name }}</li></a>
+      </div>
+  {% endfor %}
+
+  <h1>Nach Themen</h1>
+  <h1>Nach Tags</h1>
+
+</div>
+
+
+>>>>>>> Stashed changes
 
 </body>
 </html>
