@@ -1,31 +1,87 @@
+<style>
+    .search_function{
+        visibility: hidden;
+    }
+    h1{
+        color: Black;
+        font-family: "Nunito";
+        font-size: 32px;
+        font-weight: 250;
+        margin-top: 2%;
+    }
+    h1 span{
+        font-weight: 800;
+    }
+    .register_container{
+        margin-top: 4%;
+        font-family: "Nunito";
+    }
+    .register_container ul{
+        display: none;
+    }
+    .register_container span{
+        display: none;
+    }
+    .register_container label{
+        font-weight: 800;
+    }
+    .register_container input{
+        padding: 5px;
+        font-family: "Nunito";
+        font-size: 16px;
+        margin-top: 16.5px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+        width: 300px;
+    }
+    #id_avatar{
+        border: 0px;
+    }
+    #id_avatar button{
+        background-color: beige;
+    }
+    .register_btn{
+        width: 100px;
+        height: 35px;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+
+        /*margin-left: 25%;*/
+    }
+    .login_btn{
+        text-decoration: none;
+        width: 200px;
+        height: 35px;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+        margin-left: 2%;
+    }
+</style>
+
+
 {% extends 'base.html' %}
     {% block title %}Registrieren - One Kitchen{% endblock %}
 
 {% block content %}
-    <h1> Neues Konto anlegen:</h1>
+    <h1><span>Neues Konto</span> anlegen</h1>
+    <div class="register_container">
 
     <form method="post">
-
         {% csrf_token %}
-        <table style="margin: 0px auto;">
-        <tr style="margin-bottom: 3px;">
-            <td style="display:table-cell">Benutzername</td><td style="display:table-cell">{{ form.username }}</td></tr>
-        <tr style="margin-bottom: 3px;">
-            <td>Passwort</td><td>{{ form.password1 }}</td></tr>
-        <tr><td>Passwort wiederholen</td><td>{{ form.password2 }}</td></tr>
-            <tr><td style="font-size: 12px">Das Passwort sollte:</td></tr>
-            <tr><td style="font-size: 12px">mindestens 8 Zeichen haben</td></tr>
-            <tr><td style="font-size: 12px">nicht nur aus Ziffern bestehen</td></tr>
-            <tr><td style="font-size: 12px">nicht zu allgemein sein</td></tr>
-            <tr><td style="font-size: 12px">keine Ähnlichkeit mit dem Benutzernamen haben</td></tr>
+        {{ form.as_p }}
+        {{ profile_form.as_p }}
+        <button class="register_btn" type="submit">Registrieren</button>
+        <a class="login_btn" href="{% url 'login_url' %}">Du hast bereits ein Konto?  </a>
 
-                    </table>
-        <div style="margin-bottom:10px;margin-top: 15px">
-        <button class="button" type="submit">Registrieren</button>
-        </div>
-        <div>
-        <button style="font-size:10px;padding: 10px 22px;"class="buttongray button" href="{% url 'login_url' %}">Du hast bereits ein Konto?</button>
-        </div>
     </form>
+    </div>
+
 {% endblock %}
-{% block add_scripts %}{% endblock %}
+{% block add_scripts %}
+{% endblock %}
