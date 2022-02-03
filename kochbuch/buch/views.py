@@ -29,9 +29,20 @@ class RecipeForm(forms.ModelForm):
         exclude = []
 
 
-def overview(request):
-    all_recipes = models.Recipe.objects.all()
-    return render(request, 'index.html', dict(recipes=all_recipes))
+class overview(ListView):      # Startseite
+    model = Recipe
+    template_name = 'index.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(overview, self).get_context_data(*args, **kwargs)
+        recipe_dict = []
+        all_recipes = list(Recipe.objects.all())
+        context["random_recipe"] = random.choice(all_recipes)
+        return context
+
+# def overview(request):
+#     all_recipes = models.Recipe.objects.all()
+#     return render(request, 'index.html', dict(recipes=all_recipes))
 
 @login_required()
 def upload(request):
