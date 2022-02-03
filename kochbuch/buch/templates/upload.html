@@ -1,7 +1,5 @@
 <style>
-    .search_function{
-        visibility: hidden;
-    }
+
     h1{
         margin-top:40px;
         text-align: center;
@@ -104,7 +102,7 @@
         </p>
 
         {% for field in form %}
-            {% if field.name == 'author' %}
+            {% if field.name == 'author' or field.name == 'favorite' or field.name == 'comment' %}
                 {{ field.as_hidden }}
             {% else %}
                 <p class="recipe_fields_label"> {{ field.label }}:

@@ -121,10 +121,7 @@
         padding: 5px 5px;
         text-decoration: none;"
     }
-      /*@font-face {
-          font-family: "OP";
-          src: url("../static/OP.ttf")
-      }*/
+
           body {
               background-color: antiquewhite;
               font-family: Verdana;
@@ -135,6 +132,10 @@
           }
     </style>-->
 <style>
+    @font-face {
+          font-family: "OP";
+          src: url("../static/OP.ttf")
+      }
     .header{
         width: 100%;
         height: 80px;
@@ -157,12 +158,45 @@
         height: 100%;
         display: block;
         margin: 0 auto ;
+
         background-color: rgb(255,245,238);
+
+    }
+    .inner_header div:first-child{
+        border-left: 1px black solid;
+
+    }
+    .center-div{
+        max-width:20%;
+        height: 100%;
+        display: table;
+        float: left;
+
+        border-right: 1px black solid;
+
+    }
+    .center-div h1{
+
+        height: 100%;
+        display: table-cell;
+        vertical-align: middle;
+        font-family: "Nunito";
+        font-size: 25px;
+        font-weight: 100;
+        color: Black;
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
+    .center-div h1 a:link{
+        text-decoration: none;
     }
     .logo_container{
         height: 100%;
         display: table;
         float: left;
+        margin-left: 10px;
+        margin-right: 10px
     }
     .logo_container h1{
         height: 100%;
@@ -172,6 +206,7 @@
         font-size: 32px;
         font-weight: 300;
         color: Black;
+
     }
     .logo_container h1 span{
         font-weight: 800;
@@ -204,7 +239,7 @@
         border: 2px solid rgb(239,184,147);
         border-right: 0;
         border-radius: 24px 0 0 24px;
-        width: 400px;
+        width: 300px;
     }
     .search_icon{
         height: 28px;
@@ -258,6 +293,82 @@
     .dropdown:hover .dropbtn {
         background-color: rgb(239,184,147);
     }
+    .button{
+          background-color: #81DB74; /* Green */
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 12px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+          border: 2px solid black;
+    }.buttonsmall{
+          background-color: #81DB74; /* Green */
+          border: none;
+          color: white;
+          padding: 9px 22px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 12px;
+          border-radius: 8px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+          border: 2px solid black;
+    }
+    .button:hover {
+        background-color: #4CAF50;
+        color: white;
+    }
+    .buttonblue {
+        background-color: #A5D0FF;
+    }
+    .buttonblue:hover {
+        background-color: #008CBA;
+        color: white;
+    }
+    .buttonred {
+        background-color: #f44336;
+    }
+    .buttonred:hover {
+        background-color: #C11913;
+        color: white;
+    }
+    .buttongray {
+        background-color: #D9DDE0;
+        color:black
+    }
+    .buttongray:hover {
+        background-color: #e7e7e7;
+        color: black;
+    }
+    .buttonblack {
+        background-color: #555555;
+    }
+    .buttonblack:hover {
+        background-color: #7B7D7F;
+        color: white;
+    }
+    .buttonlightgreen {
+        background-color: #B2E094;
+        color:black
+    }
+    .buttonlightgreen:hover {
+        background-color: #97BC7E;
+        color: black;
+    }
+    .buttonlightblue {
+        background-color: #9BD7DD;
+        color:black
+    }
+    .buttonlightblue:hover {
+        background-color: #75A1A5;
+        color: black;
+    }
 
 </style>
 
@@ -268,21 +379,37 @@
 <body>
 
 <div class="header">
-    {%  if user.is_authenticated %}
-        <li><span>Hallo, {{ user.username }}!</span></li>
-    {% endif %}
-     <div class ="inner_header">
-         <div class="logo_container">
+
+     <li><span id="time"></span></li>
+     <div class="logo_container">
              <h1><a href="{% url 'overview' %}">One<span>KITCHEN</span></a></h1>
          </div>
+     <div class ="inner_header">
+         {%  if user.is_authenticated %}
+         <div class = "center-div">
+             <h1><a href="{% url 'upload' %}">Neues Rezept hochladen</a></h1>
+         </div>
+         {% endif %}
+         <div class = "center-div">
+             <h1><a href="{% url 'rezepte' %}">Rezepte</a></h1>
+         </div>
          <div class="search_function">
-             <input type="text" placeholder="Suche nach Rezepten..." class="search">
-             <button type="submit" class="search_btn"> <img src="/media/search.png" class="search_icon"> </button>
+             <form class="d-flex" method="POST" action="{% url 'search' %}">
+             {% csrf_token %}
+             <input class="search" type="text" placeholder="Suche nach Rezepten..." aria-label="search" name="searched">
+             <button class="search_btn" type="submit"><img src="/media/search.png" class="search_icon"></button>
+             </form>
+
          </div>
      </div>
-        <ul class="navigation">
+        <div class="navigation">
+            {%  if user.is_authenticated %}
+                <li >Hallo, {{ user.username }} </li>
+                <div class="logo_container" ><img src= "{{ user.profile.avatar.url }}"style="max-height:50px; max-width:50px" /></div>
+            {% endif %}
             <div class="dropdown">
-                <button class="dropbtn">Profile</button>
+
+                <button class="dropbtn">Profil</button>
                 <div class="dropdown-content">
                 {%  if user.is_authenticated %}
                     <a href="{% url 'profile' %}"> Mein Profil</a>
@@ -302,7 +429,7 @@
 
                 <!--<li><img src= "{{ user.profile.avatar.url }}"/></li>-->
 
-        </ul>
+        </div>
 </div>
 
 

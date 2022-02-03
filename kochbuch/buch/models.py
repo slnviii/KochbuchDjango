@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 # Create your models here.
 
 
@@ -40,11 +41,11 @@ class Recipe(models.Model):
     thema = models.ForeignKey(Theme, null=True, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, null=True)
     #zutaten = models.ManyToManyField(Zutat)  # Rezept hat mehrere Zutaten
-    author = models.ForeignKey(User, to_field="username", db_column="username", on_delete=models.CASCADE)
-    comment = models.ManyToManyField('Comment', related_query_name='comment', blank=True)
+    author = models.ForeignKey(User, to_field="username", db_column="username", on_delete=models.CASCADE, blank=True, null=True)
+    comment = models.ManyToManyField('Comment', related_query_name='comment', blank=True, null=True)
     dauer = models.IntegerField('Dauer',default="30")
     schwierigkeit = models.CharField(max_length=15, choices=(('superleicht','Sehr leicht'),('leicht','Leicht'),('mittel','Mittel'),('schwer','Schwer')),default='leicht')
-    favorite = models.ManyToManyField(User, related_name='rezepte',null=True)
+    favorite = models.ManyToManyField(User, related_name='rezepte',null=True, blank=True)
     #bewertet = models.ManyToManyField('Rating', null=True)
 
 
@@ -55,6 +56,9 @@ class Recipe(models.Model):
     def __str__(self):
         return self.title   # bild titel statt "objekt"
 
+
+    def get_absolute_url(self):
+        return reverse('recipe', args=str(self.id))
 
 # class Rating(models.Model):
 #     bewertung = models.IntegerField(max_length=1, choices=(('0', '0 Sterne'),('1', '1 Stern'),('2', '2 Sterne'),('3', '3 Sterne'),('4', '4 Sterne'),('5', '5 Sterne')),default="0")

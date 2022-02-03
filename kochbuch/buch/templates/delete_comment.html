@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Kommentar: {{ comment.body }}</h3>
+
+<div class="form-group"></div>
+     <form method="POST">
+         {% csrf_token %}
+         <strong>Willst du diesen Kommentar wirklich löschen?</strong>
+         <button class="button buttonred">Löschen</button>
+     </form>
+</div>
+
+{% endblock %}

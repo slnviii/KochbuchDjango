@@ -1,13 +1,11 @@
 <style>
-    .search_function{
-        visibility: hidden;
-    }
+
     h1{
         font-family: "Nunito";
         font-size: 45px;
     }
-    .all_recipes{
-        margin-left: 10%;
+    .all_recipes h1{
+        font-size:75px;
     }
     li{
         font-family: "Nunito";
@@ -36,6 +34,7 @@
 {% block content %}
 
 <div class="all_recipes"><h1>Alle Rezepte</h1></div>
+    <hr>
 <div class="container">
   <h1>Nach Kategorie</h1>
   {% for category in categories %}

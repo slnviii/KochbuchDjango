@@ -1,7 +1,5 @@
 <style>
-    .search_function{
-        visibility: hidden;
-    }
+
     .recipe_container{
         height: 100%;
         max-width: 60%;
@@ -38,7 +36,7 @@
     }
     .favorite_container{
         font-family: "Nunito";
-        margin-top: 19%;
+        margin-top: 50px;
     }
     .add_to_favorites, .add_comment{
         width: 200px;
@@ -67,7 +65,12 @@
 {% block content %}
 
  <div class="recipe_container">
-    <p class="recipe_title">{{ recipe.title }} Rezept</p>
+    <p class="recipe_title">{{ recipe.title }} Rezept
+     {% if recipe.author == user %}<small style="font-size:15px">
+        <a href="{% url 'edit_recipe' recipe.pk %}">bearbeiten</a></small>
+        {% endif %}
+     </p>
+
     <p class="recipe_img"> <img src= "{{ recipe.image.url}}">
     <p class="recipe_author">von <span>{{ recipe.author }}</span></p>
     <p class="recipe_ingr"><span>Zutaten: </span>{{ recipe.ingr }}</p>
@@ -80,12 +83,18 @@
  <form action="{% url 'add_favorite' recipe.pk %}" method="POST">
      {% csrf_token %}
      <p>
-          <a href = '#' >
-              <button type="submit", name="recipe_id", value="{{ recipe.id }}", class="add_to_favorites">Zu Favoriten hinzufügen</button>
-          </a>
-         {{ total_favorites }} Favorit
-     </p>
- </form>
+         {% if user.is_authenticated %}
+          {% if added %}
+            <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}", class="button buttonred">Aus Favoriten entfernen</button></a>
+          {% else %}
+            <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}", class="button buttonlightblue">Zu Favoriten hinzufügen</button></a>
+          {% endif %}
+        {% else %}
+        <small>Login to like</small>
+        {% endif %}
+
+        - {{ total_favorites }} Favoriten</p>
+    </form>
 
 
 </div>
@@ -97,16 +106,23 @@
          <a href="{% url 'add_comment' recipe.pk %}"><button class="add_comment">Kommentar hinzufügen</button></a>
        </div>
   {% endif %}
+ <div>
   {% for comment in recipe.comments.all %}
     {% if comment.recipe == recipe %}    <!-- das recipe in comment ist kein string/name sondern das model von recipe -->
         <ul>
            <strong>{{ comment.author }}</strong>  ||| {{ comment.created }}
-        <hr>
+
         <li>{{ comment.body }}</li>
         </ul>
+    {% if comment.author == user.username %}
+        <ul>
+        <a href="{% url 'delete_comment' comment.pk %}"><button class="buttonsmall buttonred">Löschen</button></a>
+        </ul>
+    {% endif %}
+        <hr>
   {% endif %}
 {% endfor %}
-
+</div>
 </div>
 
 <ul>
