@@ -1,0 +1,91 @@
+<style>
+    .search_function{
+        visibility: hidden;
+    }
+    h1{
+        font-family: "Nunito";
+        margin-left: 10%;
+    }
+    .profile_container{
+        font-family: "Nunito";
+        font-size: 18px;
+    }
+    .profile_pic{
+        margin-top: 10px;
+        max-height:150px;
+        max-width:150px;
+    }
+    .edit_profile{
+        width: 150px;
+        height: 35px;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    .favorites_container{
+        font-family: "Nunito";
+        font-size: 18px;
+    }
+    .favorites_container p{
+        border: 0.5px solid rgb(239,184,147);
+        background-color: rgb(255,245,238);
+    }
+    .favorites_container img{
+        max-height: 400px;
+        max-width: 400px;
+    }
+    .favorites_container a:link{
+        text-decoration: none;
+    }
+</style>
+
+{% extends 'base.html' %}
+{% block title %}
+    Profil - One Kitchen
+{% endblock %}
+{% block content %}
+
+    <h1>Hallo, {{ user.username }}!</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+
+    {% endif %}
+
+    <div class="profile_container">
+        <span><img class="profile_pic" src= "{{ user.profile.avatar.url }}" /></span>
+        <p>Deine Beschreibung</p>
+        <p>{{ user.profile.bio }}</p>
+        <a href="{% url 'edit_profile' %}"><button class="edit_profile">Profil bearbeiten</button></a>
+    </div>
+
+    </br>
+
+    <div class="favorites_container">
+    <p>Deine Favoriten</p>
+
+    {% for recipe in recipes %}
+        {% for favorite in recipe.favorite.all %}
+
+            {% if user.id == favorite.id %}
+                <div>
+                    <a href="{% url 'recipe' recipe.pk %}"><img src="{{recipe.image.url}}"></a>
+                    <div><a href="{%  url 'recipe' recipe.pk %}">{{ recipe }}</a></div>
+                </div>
+            {% endif %}
+
+        {% endfor %}
+        </br>
+    {% endfor %}
+    </div>
+
+
+
+{% endblock %}
+
+
+

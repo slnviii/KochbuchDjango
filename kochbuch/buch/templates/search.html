@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <br>
+
+    {%  if searched %}
+    <h1>Ergebnisse für:{{ searched }}</h1>
+
+    <table class="center" style="border: 1px solid black">  <!--- tabelle für alle rezepte dieser kategorie --->
+    <tr style="font-size: 30px;border: 1px solid black">
+        <th></th>
+        <th style="width:400px;">Rezept</th>
+        <th>Author</th>
+
+
+    </tr>
+        {% for recipe in recipes %}
+            <td style="width:150px; height:100px;"> <img src= "{{ recipe.image.url}}"style="max-height:100%; max-width:100%" /> </td>
+            <td style="width:400px;"><a href="{%  url 'recipe' recipe.pk %}">{{ recipe.title }}</a></td>
+            <td style="width:150px;">   {{ recipe.author }}</td>
+        {% endfor %}
+
+    {% else %}
+        <h1>keine Ergebnisse</h1>
+    {% endif %}
+
+
+{%  endblock %}

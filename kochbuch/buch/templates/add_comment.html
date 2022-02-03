@@ -1,0 +1,56 @@
+<style>
+    .search_function{
+        visibility: hidden;
+    }
+    h1{
+        font-family: "Nunito";
+        font-size: 45px;
+        margin-left:10%;
+    }
+    h1 span{
+        font-weight: 800;
+        color: black;
+    }
+    #id_body.form-control{
+        padding: 5px;
+        height: 150px;
+        width: 400px;
+        font-family: "Nunito";
+        font-size: 16px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+    }
+    .add_comment_btn{
+        width: 200px;
+        height: 35px;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+</style>
+
+{% extends 'base.html' %}
+{% block content %}
+<h1> <span>Kommentar </span>abgeben</h1>
+
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+        <p>
+        {{ form.body }}
+        </p>
+        {% else %}
+        <p>
+        {{ form.as_p }}
+        </p>
+        {% endif %}
+    <button class="add_comment_btn">Kommentar hinzufügen</button>
+
+    </form>
+
+
+</div>
+{% endblock %}
