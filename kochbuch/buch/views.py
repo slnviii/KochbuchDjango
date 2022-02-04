@@ -154,6 +154,7 @@ class EditRecipeView(UpdateView):
     model = Recipe
     template_name = 'edit_recipe.html'
     fields = ['title','image', 'ingr', 'instr', 'kategorien','tags','thema', 'dauer', 'schwierigkeit']
+
 # def recipe(request, recipe_name):
 #     #  rec_name = request.GET['name']      # hier wird der name des rezepts abgefragt auf den man geklickt hat
 #     recipe = models.Recipe.objects.get(title=recipe_name)  # das geklickte rezept wird gleichgesetzt und als objekt abgespeichert

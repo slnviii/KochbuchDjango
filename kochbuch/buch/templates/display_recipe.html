@@ -94,9 +94,11 @@
      <p>
          {% if user.is_authenticated %}
           {% if added %}
-            <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}", class="remove_from_favorites_btn">Aus Favoriten entfernen</button></a>
+            <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}",
+                                   class="remove_from_favorites_btn">Aus Favoriten entfernen</button></a>
           {% else %}
-            <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}", class="add_to_favorites_btn">Zu Favoriten hinzufügen</button></a>
+            <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}",
+                                   class="add_to_favorites_btn">Zu Favoriten hinzufügen</button></a>
           {% endif %}
         {% else %}
         <small>Login to like</small>
