@@ -1,55 +1,125 @@
+<style>
+    h1{
+        font-family: "Nunito";
+    }
+    .edit_recipe{
+        font-family: "Nunito";
+        font-size: 20px;
+    }
+    .edit_recipe ul{
+        font-weight: 800;
+    }
+    .edit_recipe input{
+        padding: 5px;
+        font-family: "Nunito";
+        font-size: 16px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+        width: 300px;
+    }
+    .edit_recipe textarea{
+        padding: 5px;
+        height: 145px;
+        width: 400px;
+        font-family: "Nunito";
+        font-size: 16px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+    }
+    .edit_recipe select{
+        padding: 5px;
+        height: 100px;
+        width: 400px;
+        font-family: "Nunito";
+        font-size: 16px;
+        border: 2px solid rgb(239,184,147);
+        border-radius: 24px 24px 24px 24px ;
+    }
+    .edit_recipe select option{
+        padding: 5px;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    #id_schwierigkeit, #id_thema{
+        height: 40px;
+        padding: 1px;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    .edit_recipe select option hover{
+       background-color: rgb(255,245,238);
+    }
+    .save_btn{
+        width: 100px;
+        height: 35px;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    #id_image{
+        border: 0px;
+    }
+    .author{
+        font-weight: 800;
+    }
+
+</style>
+
+
 {% extends 'base.html' %}
     {% block title %}Rezept bearbeiten - One Kitchen{% endblock %}
 {% block content %}
-    <h1 style="margin-top:40px">{{ recipe.title }} bearbeiten</h1>
+    <h1>{{ recipe.title }} bearbeiten</h1>
 
-<form action="" method="post" enctype="multipart/form-data">
+<form class="edit_recipe" action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <p style="font-size: 20px;font-weight: bold;margin-top:20px">
+    <p class="author">
        Ersteller: {{ user.username }}
 
     </p>
- <div style="">
-     <div style="background-color: #E5D9C9;width: 430px;display: inline-block;border: 1px solid black;margin-right:-5px">
+ <div>
+     <div>
         <p>
             <ul>Rezepttitel</ul>
             <ul>{{ form.title }}</ul>
         </p>
-        <p style="border: 1px solid black;">
+        <p>
             <ul style="">Zutaten</ul>
             <ul>{{ form.ingr }}</ul>
         </p>
-        <p style="border: 1px solid black;">
+        <p>
             <ul>Zubereitung</ul>
             <ul>{{ form.instr }}</ul>
         </p>
-        <p style="border: 1px solid black;">
+        <p>
             <ul>Dauer in Minuten</ul>
             <ul>{{ form.dauer }}</ul>
         </p>
      </div>
-     <div style="background-color: #E5D9C9;width: 430px;display: inline-block;border: 1px solid black;">
-        <p  style="margin-top:35px">
+     <div>
+        <p>
             <ul style="">Eine oder mehrere Kategorien wählen(ctrl click)</ul>
             <ul>{{ form.kategorien }}</ul>
         </p>
-        <p style="border: 1px solid black">
+        <p>
             <ul>Thema ändern</ul>
             <ul>{{ form.thema }}</ul>
         </p>
-        <p style="border: 1px solid black">
+        <p>
             <ul>Ein oder mehrere Tags wählen(ctrl click)</ul>
             <ul>{{ form.tags }}</ul>
         </p>
-        <p style="">
+        <p>
             <ul>Dein Tag ist nicht dabei?</ul>
             <ul>Füge es hier hinzu</ul>
         </p>
-        <p style="border: 1px solid black">
+        <p>
             <ul>Schwierigkeit ändern(ctrl click)</ul>
             <ul>{{ form.schwierigkeit }}</ul>
         </p>
-        <p style="border: 1px solid black;">
+        <p>
             <ul>Bild ändern</ul>
             <ul>{{ form.image }}</ul>
         </p>
@@ -61,7 +131,7 @@
 <div class="form-group"></div>
      <form method="POST">
          {% csrf_token %}
-         <button class=""btn btn-secondary">speichern</button>
+         <button class="save_btn">speichern</button>
      </form>
 </div>
 </form>

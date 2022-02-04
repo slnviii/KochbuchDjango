@@ -38,8 +38,17 @@
         font-family: "Nunito";
         margin-top: 50px;
     }
-    .add_to_favorites, .add_comment{
+    .add_comment, .add_to_favorites_btn, .remove_from_favorites_btn{
         width: 200px;
+        height: 35px;
+        background-color: rgb(255,245,238);
+        border: 2px solid rgb(239,184,147);
+        border-radius: 10%;
+        font-family: "Nunito";
+        font-size: 16px;
+    }
+    .delete_comment_btn{
+        width: 100px;
         height: 35px;
         background-color: rgb(255,245,238);
         border: 2px solid rgb(239,184,147);
@@ -85,9 +94,9 @@
      <p>
          {% if user.is_authenticated %}
           {% if added %}
-            <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}", class="button buttonred">Aus Favoriten entfernen</button></a>
+            <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}", class="remove_from_favorites_btn">Aus Favoriten entfernen</button></a>
           {% else %}
-            <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}", class="button buttonlightblue">Zu Favoriten hinzufügen</button></a>
+            <a href = '#' ><button type="submit", name="recipe_id", value="{{ recipe.id }}", class="add_to_favorites_btn">Zu Favoriten hinzufügen</button></a>
           {% endif %}
         {% else %}
         <small>Login to like</small>
@@ -116,7 +125,7 @@
         </ul>
     {% if comment.author == user.username %}
         <ul>
-        <a href="{% url 'delete_comment' comment.pk %}"><button class="buttonsmall buttonred">Löschen</button></a>
+        <a href="{% url 'delete_comment' comment.pk %}"><button class="delete_comment_btn">Löschen</button></a>
         </ul>
     {% endif %}
         <hr>

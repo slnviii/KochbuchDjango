@@ -1,27 +1,47 @@
+<style>
+
+ .recipes_container{
+     margin-top:5%;
+     font-size: 20px;
+     font-family: "Nunito";
+ }
+ .recipes_container span{
+     font-weight: 800;
+ }
+ h1{
+     font-family: "Nunito";
+     font-size: 45px;
+     font-weight: 500;
+     margin-left: 10%;
+ }
+ .recipe_img{
+     height: 250px;
+     width: 250px;
+ }
+ a{
+     text-decoration: none;
+     color: black;
+ }
+</style>
+
 {% extends 'base.html' %}
 {% block content %}
     <br>
 
     {%  if searched %}
-    <h1>Ergebnisse für:{{ searched }}</h1>
-
-    <table class="center" style="border: 1px solid black">  <!--- tabelle für alle rezepte dieser kategorie --->
-    <tr style="font-size: 30px;border: 1px solid black">
-        <th></th>
-        <th style="width:400px;">Rezept</th>
-        <th>Author</th>
-
-
-    </tr>
-        {% for recipe in recipes %}
-            <td style="width:150px; height:100px;"> <img src= "{{ recipe.image.url}}"style="max-height:100%; max-width:100%" /> </td>
-            <td style="width:400px;"><a href="{%  url 'recipe' recipe.pk %}">{{ recipe.title }}</a></td>
-            <td style="width:150px;">   {{ recipe.author }}</td>
-        {% endfor %}
+        <h1>Ergebnisse für: {{ searched }}</h1>
+        <div  class="recipes_container">
+         {% for recipe in recipes %}
+           <p>
+              <a href="{%   url 'recipe' recipe.pk %}"><img src= "{{ recipe.image.url}}" class="recipe_img"/><br/></a>
+              <a href="{%  url 'recipe' recipe.pk %}"><span>{{ recipe.title }}</span><br/></a>
+              von {{ recipe.author }}
+           </p>
+         {% endfor %}
+        </div>
 
     {% else %}
         <h1>keine Ergebnisse</h1>
     {% endif %}
-
 
 {%  endblock %}
