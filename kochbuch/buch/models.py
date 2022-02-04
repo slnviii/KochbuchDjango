@@ -58,7 +58,8 @@ class Recipe(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('recipe', args=str(self.id))
+        #return reverse('recipe', args=str(self.id))
+        return reverse ('overview')
 
 # class Rating(models.Model):
 #     bewertung = models.IntegerField(max_length=1, choices=(('0', '0 Sterne'),('1', '1 Stern'),('2', '2 Sterne'),('3', '3 Sterne'),('4', '4 Sterne'),('5', '5 Sterne')),default="0")
