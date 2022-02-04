@@ -12,11 +12,11 @@
      font-family: "Nunito";
      font-size: 45px;
      font-weight: 500;
-     margin-left: 10%;
+
  }
  .recipe_img{
-     height: 250px;
-     width: 250px;
+     max-height: 250px;
+     max-width: 250px;
  }
 </style>
 {% extends 'base.html' %}
@@ -26,32 +26,14 @@
 {% block content %}
 <h1>Rezepte nach Thema: <span>{{ theme.name }}</span></h1>
 
-<!--<table class="center" >
-     tabelle für alle rezepte dieser kategorie
-    <tr>
-        <th></th>
-        <th>Rezept</th>
-        <th>Author</th>
-    </tr>
-
-    {% for recipe in theme.recipe_set.all %}
-    <tr>
-         table rows loop, für jedes rezept in der kategorie wird 1 reihe erstellt
-       <td> <img src="{{ recipe.image.url}}"/> </td>
-       <td><a href="{%  url 'recipe' recipe.pk %}">{{ recipe.title }}</a></td> rezept ist klickbar
-       <td>{{ recipe.author }}</td>
-    </tr>
-    {% endfor %}
-
-</table>--->
 
 <div  class="recipes_container">
     {% for recipe in theme.recipe_set.all %}
-        <p>
+        <div style="display: inline-block; margin: 10px">
          <a href="{%   url 'recipe' recipe.pk %}"><img src= "{{ recipe.image.url}}" class="recipe_img"/><br/></a>
          <span>{{ recipe.title }}</span><br/>
          von {{ recipe.author }}
-        </p>
+        </div>
     {% endfor %}
 
 </div>

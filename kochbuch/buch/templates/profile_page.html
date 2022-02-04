@@ -33,8 +33,8 @@
         background-color: rgb(255,245,238);
     }
     .favorites_container img{
-        max-height: 400px;
-        max-width: 400px;
+        max-height: 200px;
+        max-width: 200px;
     }
     .favorites_container a:link{
         text-decoration: none;
@@ -69,6 +69,7 @@
     <p>Deine Favoriten</p>
 
     {% for recipe in recipes %}
+        <div style="display: inline-block; margin: 10px">
         {% for favorite in recipe.favorite.all %}
 
             {% if user.id == favorite.id %}
@@ -79,7 +80,7 @@
             {% endif %}
 
         {% endfor %}
-        </br>
+        </div>
     {% endfor %}
     </div>
 

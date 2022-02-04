@@ -47,7 +47,6 @@
   <h1>Nach Tags</h1>
 
     {% for tag in tags %}
-      <!--- alle vorhandenen kategorieren werden durchlaufen und angezeigt + klickbar --->
       <div class="category_container">
           <a href="{%  url 'tag' tag.name %}"><li>{{ tag.name }}</li></a>
       </div>
@@ -57,7 +56,6 @@
   <h1>Nach Themen</h1>
 
      {% for theme in themes %}
-      <!--- alle vorhandenen kategorieren werden durchlaufen und angezeigt + klickbar --->
       <div class="category_container">
           <a href="{%  url 'theme' theme.name %}"><li>{{ theme.name }}</li></a>
       </div>

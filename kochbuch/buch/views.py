@@ -49,9 +49,7 @@ def random_recipe(request):
     return HttpResponse(rec)
 
 
-# def overview(request):
-#     all_recipes = models.Recipe.objects.all()
-#     return render(request, 'index.html', dict(recipes=all_recipes))
+
 
 @login_required()
 def upload(request):
@@ -62,6 +60,7 @@ def upload(request):
             instance = form.save(commit=False)
             instance.author = request.user
             instance.save()
+            form.save_m2m()
             return HttpResponseRedirect('/')  # Umleitung
         else:
             print(form.errors)
@@ -103,11 +102,6 @@ class ChangePasswordView(PasswordChangeView):
     template_name = 'change_password.html'
     success_url = reverse_lazy('profile')
 
-# class CommentForm(forms.ModelForm):
-#     class Meta:
-#         model = Comment
-#         fields = ('author', 'body')
-
 
 def AddFavorite(request, pk):
     recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
@@ -144,6 +138,7 @@ class RecipeView(DetailView):      # Rezept darstellen
         context["added"] = added
         return context
 
+
 class DeleteComment(DeleteView):
     model = Comment
     template_name = 'delete_comment.html'
@@ -164,25 +159,6 @@ class EditRecipeView(UpdateView):
     template_name = 'edit_recipe.html'
     fields = ['title','image', 'ingr', 'instr', 'kategorien','tags','thema', 'dauer', 'schwierigkeit']
 
-# def recipe(request, recipe_name):
-#     #  rec_name = request.GET['name']      # hier wird der name des rezepts abgefragt auf den man geklickt hat
-#     recipe = models.Recipe.objects.get(title=recipe_name)  # das geklickte rezept wird gleichgesetzt und als objekt abgespeichert
-#     if request.method == "POST":
-#         form = CommentForm(request.POST)
-#         if form.is_valid():  # Formular überprüfen
-#             form.instance.author = request.user  # aktiver user wird automatisch als author des rezepts festgesetzt
-#             # Create Comment object but don't save to database yet
-#             form = form.save(commit=False)
-#             # Assign the current recipe to the comment
-#             form.recipe = recipe
-#             # Save the comment to the database
-#             form.save()
-#             return HttpResponseRedirect('/')  # Umleitung
-#     else:
-#         form = CommentForm()  # leeres Formular
-#     all_comments = models.Comment.objects.all()  # alle kommentare rein um weiterzugeben
-#     return render(request, 'display_recipe.html', dict(form=form, recipe=recipe, comments = all_comments))
-#    # return render(request, 'display_recipe.html', dict(recipe=recipe))  # recipe object wird übergeben (s. display_recipe wie benutzt)
 
 
 def category(request, category_name):
@@ -198,16 +174,6 @@ def theme(request, theme_name):
     return render(request, 'theme.html', dict(theme=theme))
 
 
-# @login_required()
-# def favorites(request, userid):
-#     favorites = get_object_or_404(RecipeForm, userid=userid)
-#     if models.Recipe.favorites.filter(userid=request.user.id).exists():
-#         models.Recipe.favorites.remove(request.user)
-#     else:
-#         models.Recipe.favorites.add(request.user)
-#     return HttpResponseRedirect('favorites/')
-
-
 def filter_form(request):
     all_categories = models.Category.objects.all()
     all_users = User.objects.all()
@@ -215,8 +181,6 @@ def filter_form(request):
         categories=all_categories,
         users=all_users,
     ))
-
-#def search(request):
 
 
 def time(request):
