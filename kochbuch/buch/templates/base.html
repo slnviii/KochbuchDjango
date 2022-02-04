@@ -440,6 +440,7 @@
 <script>
     const timeEle = document.getElementById('time');
     function showTime() {
+        console.log("Hello world!");
         fetch('/time').then((response) => {
             if (!response.ok){
                 throw new Error('Loading failed');
@@ -456,12 +457,13 @@
     }
     showTime();
     setInterval(showTime, 1000);
-    {% block add_scripts %}
 
-    {% endblock %}
 
 
 </script>
+{% block add_scripts %}
+
+    {% endblock %}
 </body>
 
 </html>

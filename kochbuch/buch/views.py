@@ -38,8 +38,16 @@ class overview(ListView):      # Startseite
         context = super(overview, self).get_context_data(*args, **kwargs)
         recipe_dict = []
         all_recipes = list(Recipe.objects.all())
+        context["recipes"] = models.Recipe.objects.all()
         context["random_recipe"] = random.choice(all_recipes)
+
         return context
+
+def random_recipe(request):
+    all_recipes = list(Recipe.objects.all())
+    rec = random.choice(all_recipes)
+    return HttpResponse(rec)
+
 
 # def overview(request):
 #     all_recipes = models.Recipe.objects.all()
@@ -64,8 +72,9 @@ def upload(request):
 
 def rezepte_main(request):
     all_categories = models.Category.objects.all()
-
-    return render(request, 'rezepte_main.html', dict(categories=all_categories))
+    all_tags = models.Tag.objects.all()
+    all_themes = models.Theme.objects.all()
+    return render(request, 'rezepte_main.html', dict(categories=all_categories,tags=all_tags,themes=all_themes))
 
 
 @login_required()
@@ -179,6 +188,14 @@ class EditRecipeView(UpdateView):
 def category(request, category_name):
     category = models.Category.objects.get(name=category_name)    # ähnlich recipe, aber verknüpft mit rezept über manytomany, s. models
     return render(request, 'category.html', dict(category=category))  # dict übergeben, wird anders abgefragt, s. category.html l.41
+
+def tag(request, tag_name):
+    tag = models.Tag.objects.get(name=tag_name)
+    return render(request, 'tag.html', dict(tag=tag))
+
+def theme(request, theme_name):
+    theme = models.Theme.objects.get(name=theme_name)    # ähnlich recipe, aber verknüpft mit rezept über manytomany, s. models
+    return render(request, 'theme.html', dict(theme=theme))
 
 
 # @login_required()
