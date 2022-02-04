@@ -74,13 +74,53 @@
     <div>
         <ul class="random_title">Random Rezept</ul>
         <div class="random_recipe">
-            <div class="random_recipe2">
-                <a href="{% url 'recipe' random_recipe.pk %}"><img src="{{random_recipe.image.url}}"style="max-height:200px; max-width:200px;border: solid black 2px"></a>
-                <div class="random_recipe3"><a href="{%  url 'recipe' random_recipe.pk %}"style="font-family:impact;font-size: 25px;color:white; text-decoration: none;-webkit-text-stroke-width: 1px;-webkit-text-stroke-color: black;">{{ random_recipe }}</a></div>
+            <div id="random-div" class="random_recipe2">
+                {% for recipe in recipes %}
+                 {% if recipe.title == random_recipe.title %}
+                <a href="{% url 'recipe' recipe.pk %}"><img src="{{recipe.image.url}}"style="max-height:200px; max-width:200px;border: solid black 2px"></a>
+                <div class="random_recipe3"><a href="{%  url 'recipe' recipe.pk %}"style="font-family:impact;font-size: 25px;color:white; text-decoration: none;-webkit-text-stroke-width: 1px;-webkit-text-stroke-color: black;">{{ random_recipe }}</a></div>
+                   {%  endif %}
+                {% endfor %}
             </div>
         </div>
+        <div>
+            <button id="random-button" type=submit class="buttonsmall buttonlightblue">Würfeln!</button>
+        </div>
+
     </div>
 {% endblock %}
 {% block add_scripts %}
+<script>
+    const randomBtn = document.getElementById('random-button')
+    randomBtn.addEventListener('click', new_random)
+
+    function updateDiv()
+{
+    $( "#random-div" ).load(window.location.href + " #random-div" );
+    }
+    function new_random() {
+        const randomD = document.getElementById('random-div');
+        fetch('/random_recipe').then((response) => {
+            console.error("hi");
+            if (!response.ok){
+                throw new Error('Loading failed');
+
+            }
+            else {
+                return response.text()
+            }
+        }).then((random) => {
+            console.error(random);
+                randomD.innerHTML = randomD.innerHTML.replace(/random_recipe.title/g,random);
+                updateDiv();
+        }).catch(error => {
+            console.error(error);
+    })
+
+    }
+
+
+
+</script>
 
 {% endblock %}
