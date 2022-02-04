@@ -448,7 +448,6 @@
 <script>
     const timeEle = document.getElementById('time');
     function showTime() {
-        console.log("Hello world!");
         fetch('/time').then((response) => {
             if (!response.ok){
                 throw new Error('Loading failed');

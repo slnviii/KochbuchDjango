@@ -162,15 +162,15 @@ class EditRecipeView(UpdateView):
 
 
 def category(request, category_name):
-    category = models.Category.objects.get(name=category_name)    # ähnlich recipe, aber verknüpft mit rezept über manytomany, s. models
-    return render(request, 'category.html', dict(category=category))  # dict übergeben, wird anders abgefragt, s. category.html l.41
+    category = models.Category.objects.get(name=category_name)
+    return render(request, 'category.html', dict(category=category))
 
 def tag(request, tag_name):
     tag = models.Tag.objects.get(name=tag_name)
     return render(request, 'tag.html', dict(tag=tag))
 
 def theme(request, theme_name):
-    theme = models.Theme.objects.get(name=theme_name)    # ähnlich recipe, aber verknüpft mit rezept über manytomany, s. models
+    theme = models.Theme.objects.get(name=theme_name)
     return render(request, 'theme.html', dict(theme=theme))
 
 

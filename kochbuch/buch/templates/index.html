@@ -94,14 +94,13 @@
     const randomBtn = document.getElementById('random-button')
     randomBtn.addEventListener('click', new_random)
 
-    function updateDiv()
-{
+    function updateDiv(){
     $( "#random-div" ).load(window.location.href + " #random-div" );
     }
     function new_random() {
         const randomD = document.getElementById('random-div');
         fetch('/random_recipe').then((response) => {
-            console.error("hi");
+
             if (!response.ok){
                 throw new Error('Loading failed');
 
@@ -110,7 +109,6 @@
                 return response.text()
             }
         }).then((random) => {
-            console.error(random);
                 randomD.innerHTML = randomD.innerHTML.replace(/random_recipe.title/g,random);
                 updateDiv();
         }).catch(error => {
