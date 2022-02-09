@@ -3,10 +3,12 @@
 <head>
     {% load static %}
     <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:wght@200;279&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <meta charset="UTF-8">
-    <style>
-    .button {
+    <!--<style>
+
+    .button{
           background-color: #81DB74; /* Green */
           border: none;
           color: white;
@@ -18,119 +20,296 @@
           border-radius: 12px;
           transition-duration: 0.4s;
           cursor: pointer;
-            border: 2px solid black;
-        }
-     .button:hover {
+          border: 2px solid black;
+    }
+    .button:hover {
         background-color: #4CAF50;
-        color: white;}
-    .buttonblue {background-color: #A5D0FF;}
+        color: white;
+    }
+    .buttonblue {
+        background-color: #A5D0FF;
+    }
     .buttonblue:hover {
         background-color: #008CBA;
-        color: white;}
-    .buttonred {background-color: #f44336;}
+        color: white;
+    }
+    .buttonred {
+        background-color: #f44336;
+    }
     .buttonred:hover {
         background-color: #C11913;
-        color: white;}
-    .buttongray {background-color: #D9DDE0;color:black}
+        color: white;
+    }
+    .buttongray {
+        background-color: #D9DDE0;
+        color:black
+    }
     .buttongray:hover {
         background-color: #e7e7e7;
-        color: black;}
-    .buttonblack {background-color: #555555;}
+        color: black;
+    }
+    .buttonblack {
+        background-color: #555555;
+    }
     .buttonblack:hover {
         background-color: #7B7D7F;
-        color: white;}
-    .buttonlightgreen {background-color: #B2E094;color:black}
+        color: white;
+    }
+    .buttonlightgreen {
+        background-color: #B2E094;
+        color:black
+    }
     .buttonlightgreen:hover {
         background-color: #97BC7E;
-        color: black;}
-    .buttonlightblue {background-color: #9BD7DD;color:black}
+        color: black;
+    }
+    .buttonlightblue {
+        background-color: #9BD7DD;
+        color:black
+    }
     .buttonlightblue:hover {
         background-color: #75A1A5;
-        color: black;}
-.dropbtn {
-  display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;
-}
+        color: black;
+    }
+    .dropbtn {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+     li a:hover, .dropdown:hover .dropbtn {
+         background-color: #C6A385;
+     }
+     li.dropdown {
+         display: inline-block;
+     }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #997C68;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        border: 1px solid black;
+        display: block;
+        text-align: left;
+    }
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    ul{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+    li span{
+        font-size:15px;
+        display:inline-block;
+        color: white;
+        text-align: center;
+        padding: 5px 5px;
+        text-decoration: none;"
+    }
+      /*@font-face {
+          font-family: "OP";
+          src: url("../static/OP.ttf")
+      }*/
+          body {
+              background-color: antiquewhite;
+              font-family: Verdana;
+              text-align: center;
+             {% block style %}
 
-li a:hover, .dropdown:hover .dropbtn {
-  background-color: #C6A385;
-}
+             {% endblock %}
+          }
+    </style>-->
+<style>
+    .header{
+        width: 100%;
+        height: 80px;
+        display: block;
+        background-color: rgb(255,245,238);
+    }
+    .header li{
+        float: left;
+        list-style: none;
+        font-family: "Nunito";
+        font-size: 20px;
+        font-weight: 300;
+        margin-top: 1.5%;
+    }
+    body{
+        background-color: white;
+    }
+    .inner_header{
+        width: 1000px;
+        height: 100%;
+        display: block;
+        margin: 0 auto ;
+        background-color: rgb(255,245,238);
+    }
+    .logo_container{
+        height: 100%;
+        display: table;
+        float: left;
+    }
+    .logo_container h1{
+        height: 100%;
+        display: table-cell;
+        vertical-align: middle;
+        font-family: "Nunito";
+        font-size: 32px;
+        font-weight: 300;
+        color: Black;
+    }
+    .logo_container h1 span{
+        font-weight: 800;
+        color: black;
+    }
+    .logo_container h1 a:link{
+        text-decoration: none;
+    }
+    .navigation{
+        float:right;
+        height: 100%;
+        margin-top: -4%;
+        margin-right: 4%;
+    }
+    .navigation a{
+        font-family: "Nunito";
+        font-size: 16px;
+        font-weight: 600;
+        float: left;
+    }
+    .search_function{
+        height: 100%;
+        float: right;
+    }
+    .search{
+        padding: 10.5px;
+        font-family: "Nunito";
+        font-size: 16px;
+        margin-top: 16.5px;
+        border: 2px solid rgb(239,184,147);
+        border-right: 0;
+        border-radius: 24px 0 0 24px;
+        width: 400px;
+    }
+    .search_icon{
+        height: 28px;
+    }
+    .search_btn{
+        float: right;
+        padding: 7.2px 10px;
+        margin-top: 16.9px;
+        margin-right: 16px;
+        background-color: rgb(255,245,238);
+        border-radius: 0 24px 24px 0;
+        font-size: 16px;
+        border: 2px solid rgb(239,184,147);
+        border-left-width: 0;
+        cursor: pointer;
+    }
+    .dropbtn {
+        background-color: rgb(255,245,238);
+        color: black;
+        padding: 16px;
+        font-family: "Nunito";
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+    }
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    .dropdown-content a:hover {
+        background-color: #f1f1f1
+    }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    .dropdown:hover .dropbtn {
+        background-color: rgb(239,184,147);
+    }
 
-li.dropdown {
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #997C68;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-    border: 1px solid black;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1;}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-      @font-face { font-family: "OP"; src: url("../static/OP.ttf")}
-
-            body {
-                background-color: antiquewhite;
-                font-family: Verdana;
-                text-align: center;{% block style %}{% endblock %}
-            }
-        </style>
+</style>
 
     <title>{% block title %}One Kitchen{% endblock %}</title>
 </head>
 
 
 <body>
-<ul style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;background-color: #333;">
-    <li style="float:left;border-right: 1px solid #bbb;"><span style="font-size:30px; display:inline-block;color: white;text-align: center; padding: 5px 15px; text-decoration: none;font-family: OP;">One Kitchen</span></li>
-    <li style="float:left;"><span style="font-size:15px; display:inline-block;color: white;text-align: center; padding: 5px 5px; text-decoration: none;" id="time"></span></li>
 
-
-
-    <li style="display: inline-block;border-right: 1px solid #bbb;border-left: 1px solid #bbb;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'overview' %}">Home</a></li>
-    <li style="display: inline-block;border-right: 1px solid #bbb;border-left: 1px solid #bbb;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'search' %}">Suche</a></li>
-    <li style="display: inline-block;border-right: 1px solid #bbb;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'rezepte' %}">Rezepte</a></li>
-        {%  if user.is_authenticated %} <!--- wenn user eingeloggt --->
-    <li style="display: inline-block;border-right: 1px solid #bbb;;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'upload' %}">Neues Rezept hochladen</a></li>
-
-    <li style= "float:right;border-left: 2px solid #bbb;" class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">Profil</a>
-            <div style="left: 90%;right: auto;border: 1px solid black;"class="dropdown-content">
-              <a href="{% url 'profile' %}">Mein Profil</a>
-              <a href="{% url 'edit_profile' %}">Profil bearbeiten</a>
-                {% if user.is_superuser %}
-                    <a href="{% url 'admin:index' %}">Admin Panel</a>
+<div class="header">
+    {%  if user.is_authenticated %}
+        <li><span>Hallo, {{ user.username }}!</span></li>
+    {% endif %}
+     <div class ="inner_header">
+         <div class="logo_container">
+             <h1><a href="{% url 'overview' %}">One<span>KITCHEN</span></a></h1>
+         </div>
+         <div class="search_function">
+             <input type="text" placeholder="Suche nach Rezepten..." class="search">
+             <button type="submit" class="search_btn"> <img src="/media/search.png" class="search_icon"> </button>
+         </div>
+     </div>
+        <ul class="navigation">
+            <div class="dropdown">
+                <button class="dropbtn">Profile</button>
+                <div class="dropdown-content">
+                {%  if user.is_authenticated %}
+                    <a href="{% url 'profile' %}"> Mein Profil</a>
+                    <a href="{% url 'edit_profile' %}"> Profil bearbeiten</a>
+                    {% if user.is_superuser %}
+                            <a href="{% url 'admin:index' %}">Admin Panel</a>
+                    {% endif %}
+                   <a href="{% url 'logout_url' %}"><img src="/media/logout.png">Logout</a>
+                {% else %}
+                    <a href="{% url 'login_url' %}"><img src="/media/login.png"> Login</a>
+                    <a href="{% url 'register_url' %}"> <img src="/media/register.png">Registrieren</a>
                 {% endif %}
-              <a href="{% url 'logout_url' %}">Logout</a>
+
             </div>
-    </li>
 
-    <li style="float: right"><img src= "{{ user.profile.avatar.url }}"style="max-height:50px; max-width:50px" /></li>
-    <li style="float:right;border-right: 3px solid #bbb;border-left: 1px solid #bbb;"><span style="font-size:22px; display:inline-block;color: white;text-align: center; padding: 5px 5px; text-decoration: none;">Hallo, {{ user.username }}!</span></li>
-        {% else %}
-    <li style="float: right;border-right: 1px solid #bbb;border-left: 1px solid #bbb;"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'login_url' %}">Login</a></li>
-    <li style="float: right"><a style="display: inline-block;color: white;text-align: center; padding: 14px 16px; text-decoration: none;"href="{% url 'register_url' %}">Register</a></li>
-        {% endif %}
+</div>
 
-</ul>
+                <!--<li><img src= "{{ user.profile.avatar.url }}"/></li>-->
 
-{% block content %}{% endblock %}
+        </ul>
+</div>
+
+
+{% block content %}
+
+{% endblock %}
+
 <script>
     const timeEle = document.getElementById('time');
     function showTime() {
@@ -150,10 +329,12 @@ li.dropdown {
     }
     showTime();
     setInterval(showTime, 1000);
-    {% block add_scripts %}{% endblock %}
+    {% block add_scripts %}
+
+    {% endblock %}
 
 
 </script>
-
 </body>
+
 </html>

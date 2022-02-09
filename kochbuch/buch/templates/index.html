@@ -2,17 +2,10 @@
     .home_page{
         visibility: hidden;
     }
-    .welcome{
+    h1{
         text-align: center;
-        font-family: OP;
         font-size:120px;
-        transform: rotate(6deg);
-        margin-top: -20px;
-    }
-    .welcome2{
-        text-align: center;
-        font-family: Castellar;
-        font-size:40px;
+        /*transform: rotate(6deg);*/
     }
     .buttonlightgreen button{
         font-size:18px;
@@ -37,27 +30,6 @@
         width: 300px;
         height: 300px;
     }
-    .random_recipe{
-        border: solid black 1px;
-        display:inline-block;
-        background-color: #d9d2b0
-    }.random_recipe2{
-        position: relative;
-        text-align: center;
-        display:table-cell;
-        padding:1px;
-    }.random_recipe3{
-        position: absolute;
-        top: 50%;left: 50%;
-        transform: translate(-50%, -50%)
-    }
-     .random_title{
-         text-align: center;
-        font-family:Castellar;
-        font-size: 40px;
-        margin-bottom: 0px;
-    }
-
 
 </style>
 
@@ -66,20 +38,21 @@
 {% block title %}Home - One Kitchen{% endblock %}
 
 {% block content %}
+
+<!--<h1>One Kitchen</h1>-->
+    {% if not user.is_authenticated %}
     <div>
-        <ul class="welcome2">Willkommen auf</ul>
-        <ul class="welcome">One Kitchen</ul>
+        <!--<a href="{% url 'login_url' %}"><button class="buttonlightgreen button">Login</button></a>
+        <a href="{% url 'register_url' %}"><button class="buttonlightblue button" >Registrieren</button></a>-->
+
+    </div>
+    {% endif %}
+
+    <div class="recipes">
+        <a href="{% url 'upload' %}"><img class="new_recipe_img" src="/media/dinner-recipes.png"></a>
+        <a href="{% url 'rezepte' %}"><img class="recipe_img" src="/media/rezepte.png"></a>
     </div>
 
-    <div>
-        <ul class="random_title">Random Rezept</ul>
-        <div class="random_recipe">
-            <div class="random_recipe2">
-                <a href="{% url 'recipe' random_recipe.pk %}"><img src="{{random_recipe.image.url}}"style="max-height:200px; max-width:200px;border: solid black 2px"></a>
-                <div class="random_recipe3"><a href="{%  url 'recipe' random_recipe.pk %}"style="font-family:impact;font-size: 25px;color:white; text-decoration: none;-webkit-text-stroke-width: 1px;-webkit-text-stroke-color: black;">{{ random_recipe }}</a></div>
-            </div>
-        </div>
-    </div>
 {% endblock %}
 {% block add_scripts %}
 

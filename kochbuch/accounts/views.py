@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.auth import authenticate, login as login_user
 from django.shortcuts import render
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
@@ -29,15 +28,9 @@ def register(request):
        # profile_form = ProfileForm(request.POST)
         if form.is_valid():  # and profile_form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(request, username=username, password=password)
-            if user:
-                login_user(request, user)
-                return redirect('/')
             # profile_form.data.user = form.data.user   # wie verknüpfen?
            # profile_form.save()
-
+            return redirect('login_url')
     else:
         form = UserCreationForm()
         # profile_form = ProfileForm()

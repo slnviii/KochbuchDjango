@@ -1,13 +1,14 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, get_object_or_404, redirect  # get_object_or_404 hinzugefügt
+from django.shortcuts import render, get_object_or_404 # get_object_or_404 hinzugefügt
 from django import forms
 from django.urls import reverse_lazy
 from django.views import generic
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.views import PasswordChangeView
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView
+
 from .forms import UpdateProfileForm, CommentForm
 from . import models
 from django.conf import settings
@@ -29,28 +30,16 @@ class RecipeForm(forms.ModelForm):
         exclude = []
 
 
-class overview(ListView):      # Startseite
-    model = Recipe
-    template_name = 'index.html'
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(overview, self).get_context_data(*args, **kwargs)
-        recipe_dict = []
-        all_recipes = list(Recipe.objects.all())
-        context["random_recipe"] = random.choice(all_recipes)
-        return context
-
-# def overview(request):
-#     all_recipes = models.Recipe.objects.all()
-#     return render(request, 'index.html', dict(recipes=all_recipes))
+def overview(request):
+    all_recipes = models.Recipe.objects.all()
+    return render(request, 'index.html', dict(recipes=all_recipes))
 
 @login_required()
 def upload(request):
     if request.method == "POST":
         form = RecipeForm(request.POST, request.FILES)
-        form.instance.author = request.user
         if form.is_valid():  # Formular überprüfen
-             # aktiver user wird automatisch als author des rezepts festgesetzt
+            form.instance.author = request.user  # aktiver user wird automatisch als author des rezepts festgesetzt
             form.save()
             return HttpResponseRedirect('/')  # Umleitung
     else:
@@ -98,13 +87,7 @@ class ChangePasswordView(PasswordChangeView):
 
 def AddFavorite(request, pk):
     recipe = get_object_or_404(Recipe, id=request.POST.get('recipe_id'))
-    added = False
-    if recipe.favorite.filter(id=request.user.id).exists():
-        recipe.favorite.remove(request.user)
-        added = False
-    else:
-        recipe.favorite.add(request.user)
-        added = True
+    recipe.favorite.add(request.user)
     return HttpResponseRedirect(reverse('recipe', args=[str(pk)]))
 
 class AddComment(CreateView):
@@ -124,35 +107,8 @@ class RecipeView(DetailView):      # Rezept darstellen
         context = super(RecipeView, self).get_context_data(*args, **kwargs)
         current = get_object_or_404(Recipe, id=self.kwargs['pk'])
         total_favorites = current.total_favorites()  # recipe model function callen
-
-        added = False
-        if current.favorite.filter(id=self.request.user.id):
-            added = True
         context["total_favorites"] = total_favorites
-        context["added"] = added
         return context
-
-
-class DeleteComment(DeleteView):
-    model = Comment
-    template_name = 'delete_comment.html'
-    success_url = reverse_lazy('overview')
-
-
-def search(request):
-    if request.method == "POST":
-        searched = request.POST['searched']
-        recipes = Recipe.objects.filter(title__icontains=searched)
-        return render(request, 'search.html', dict(searched=searched, recipes=recipes))
-    else:
-        return render(request, 'search.html', {})
-
-
-class EditRecipeView(UpdateView):
-    model = Recipe
-    template_name = 'edit_recipe.html'
-    fields = ['title','image', 'ingr', 'instr', 'kategorien','tags','thema', 'dauer', 'schwierigkeit']
-
 
 
 
@@ -199,9 +155,6 @@ def filter_form(request):
         categories=all_categories,
         users=all_users,
     ))
-
-
-
 
 
 def time(request):
